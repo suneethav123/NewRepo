@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project=".\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('.\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props')" />
+  <Import Project=".\packages\NUnit.3.11.0\build\NUnit.props" Condition="Exists('.\packages\NUnit.3.11.0\build\NUnit.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{59265A56-33CF-43C8-B9D9-CF075F6C0FFD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Cinemark</RootNamespace>
+    <AssemblyName>Cinemark</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ExtentReports, Version=3.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\ExtentReports.3.1.3\lib\ExtentReports.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="MongoDB.Bson, Version=2.4.0.70, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\MongoDB.Bson.2.4.0\lib\net45\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=2.4.0.70, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\MongoDB.Driver.2.4.0\lib\net45\MongoDB.Driver.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core, Version=2.4.0.70, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\MongoDB.Driver.Core.2.4.0\lib\net45\MongoDB.Driver.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.11.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>.\packages\NUnit.3.11.0\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.9.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>packages\RazorEngine.3.9.0\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="Selenium.WebDriver.WaitExtensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Selenium.WebDriver.WaitExtensions.1.0.0\lib\Selenium.WebDriver.WaitExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="SeleniumExtras.PageObjects, Version=3.11.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetSeleniumExtras.PageObjects.3.11.0\lib\net45\SeleniumExtras.PageObjects.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebDriver, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Selenium.WebDriver.3.141.0\lib\net45\WebDriver.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebDriver.Support, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Selenium.Support.3.141.0\lib\net45\WebDriver.Support.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="com.cinemark.pages\BulkGiftCardsPage.cs" />
+    <Compile Include="com.cinemark.pages\ChooseTheatre.cs" />
+    <Compile Include="com.cinemark.pages\ConnectionHomePage.cs" />
+    <Compile Include="com.cinemark.pages\FooterLinksPage.cs" />
+    <Compile Include="com.cinemark.pages\GiftCardPage.cs" />
+    <Compile Include="com.cinemark.pages\GuestServicesPage.cs" />
+    <Compile Include="com.cinemark.pages\GuestServicesRefundPage.cs" />
+    <Compile Include="com.cinemark.pages\GuestServicesRegisterGiftCardPage.cs" />
+    <Compile Include="com.cinemark.pages\MovieRewardsFeaturedRewards.cs" />
+    <Compile Include="com.cinemark.pages\FeaturedMovies.cs" />
+    <Compile Include="com.cinemark.pages\GiftsPage.cs" />
+    <Compile Include="com.cinemark.pages\HomePage.cs" />
+    <Compile Include="com.cinemark.pages\MovieClub.cs" />
+    <Compile Include="com.cinemark.pages\MovieClubGiftMembershipPage.cs" />
+    <Compile Include="com.cinemark.pages\MovieRewardsInfoPage.cs" />
+    <Compile Include="com.cinemark.pages\MovieRewardsPage.cs" />
+    <Compile Include="com.cinemark.pages\NewMovieClubSignIn.cs" />
+    <Compile Include="com.cinemark.pages\PurchaseConfirmationPage.cs" />
+    <Compile Include="com.cinemark.pages\RegisterANewAcctPage.cs" />
+    <Compile Include="com.cinemark.pages\ReloadGiftCardPage.cs" />
+    <Compile Include="com.cinemark.pages\ReserveYourSeatPage.cs" />
+    <Compile Include="com.cinemark.pages\ResetPasswordPage.cs" />
+    <Compile Include="com.cinemark.pages\SelectTickets.cs" />
+    <Compile Include="com.cinemark.pages\ShoppingCart.cs" />
+    <Compile Include="com.cinemark.pages\ShoppingCartChasePayPage.cs" />
+    <Compile Include="com.cinemark.pages\ShoppingCartGiftCard.cs" />
+    <Compile Include="com.cinemark.pages\ShoppingCartGuestCheckout.cs" />
+    <Compile Include="com.cinemark.pages\ShoppingCartSupersavers.cs" />
+    <Compile Include="com.cinemark.pages\ShoppingCartVisaCheckoutPage.cs" />
+    <Compile Include="com.cinemark.pages\SignInMCM.cs" />
+    <Compile Include="com.cinemark.pages\SupersaversPage.cs" />
+    <Compile Include="com.cinemark.pages\TheatreFeaturedMovies.cs" />
+    <Compile Include="com.cinemark.pages\TimeSlots.cs" />
+    <Compile Include="com.cinemark.pages\Utils.cs" />
+    <Compile Include="com.cinemark.testscripts\MovieClub\AddAMovieClubMemThruMovieRewards.cs" />
+    <Compile Include="com.cinemark.testscripts\MovieClub\AddAMovieThruThreatresTest.cs" />
+    <Compile Include="com.cinemark.testscripts\MovieClub\AddDuplicateMovieClubMemberTest.cs" />
+    <Compile Include="com.cinemark.testscripts\MovieClub\AddNewMovieFanThruMovieRewardsTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Other\CreateStubAcctRegisterFromMCTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Other\CreateStubAcctRegisterThruCheckoutTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Other\CreateStubAcctThenAttemptPwdResetTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Other\RegisterDuplicateAcctFromRegistrationTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Other\RegisterFromRegistrationTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Other\ResetPasswordRequestTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Other\SubmitBirthdayPartyFormTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Other\SubmitPrivateScreeningFormTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Purchases\AddZeroDollarTicketToNewMCMThruMovieRewardsTest.cs" />
+    <Compile Include="com.cinemark.testscripts\BaseTest.cs" />
+    <Compile Include="com.cinemark.testscripts\BuyATicketUncheckingMovieCreditsBoxTest.cs" />
+    <Compile Include="com.cinemark.testscripts\BuyATicketUsingNewMCMCreditsTest.cs" />
+    <Compile Include="com.cinemark.testscripts\BuyTicketsUsingGiftedCredits.cs" />
+    <Compile Include="com.cinemark.testscripts\BuyTicketsWithAddOnDiscountsNoCredit.cs" />
+    <Compile Include="com.cinemark.testscripts\MovieClub\CancelLiteMovieClubMembershipTest.cs" />
+    <Compile Include="com.cinemark.testscripts\MovieClub\CancelFullMovieClubMembershipTest.cs" />
+    <Compile Include="com.cinemark.testscripts\CompleteTicketPurchaseUsingNMCCredits.cs" />
+    <Compile Include="com.cinemark.testscripts\MovieClub\CreditsAndPointsCheckForNMCTest.cs" />
+    <Compile Include="com.cinemark.testscripts\MovieClub\MovieClubGiftPurchaseTest.cs" />
+    <Compile Include="com.cinemark.testscripts\MovieClub\MovieTicketRewardTest.cs" />
+    <Compile Include="com.cinemark.testscripts\MovieClub\LogOutAndLogBackInReactivateFullMembershipTest.cs" />
+    <Compile Include="com.cinemark.testscripts\MovieClub\ReactivateFullMembershipTest.cs" />
+    <Compile Include="com.cinemark.testscripts\MovieClub\ReactivateLiteMembershipTest.cs" />
+    <Compile Include="com.cinemark.testscripts\MovieClub\RedeemMCGiftAsSignedInMCMemberTest.cs" />
+    <Compile Include="com.cinemark.testscripts\MovieClub\RedeemMCGiftAsUserWithNoAccountTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Purchases\BulkGiftCardPurchaseTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Purchases\ChasePayPurchaseTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Purchases\CheckGiftCardBalanceTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Purchases\CheckGiftCardBalanceWithNewMCMTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Purchases\GiftCardReloadTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Purchases\GuestCheckoutTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Purchases\PayWithGiftCardTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Purchases\PurchaseValidationErrorMessagesTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Purchases\RefundTicketsWithNewMCMTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Purchases\RefundTicketsWithExisitingMCMTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Purchases\RegisterAGiftCardTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Purchases\ReservedSeatTicketPurchaseTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Purchases\SupersaversPurchaseTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Purchases\TicketPurchaseUsingSSAndGiftCardWithNewMCTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Purchases\TicketPurchUsingSupersaverAndGiftCardTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Purchases\TicketPurchaseUsingSupersaverTest.cs" />
+    <Compile Include="com.cinemark.testscripts\Purchases\VisaCheckoutPurchaseTest.cs" />
+    <Compile Include="com.cinemark.testscripts\SignInMCMTest.cs" />
+    <Compile Include="com.cinemark.testscripts\MovieClub\SwitchMovieClubMembershipTest.cs" />
+    <Compile Include="com.cinemark.pages\TestData.cs" />
+    <Compile Include="com.cinemark.testscripts\SignInMCMWithTAndCTest.cs" />
+    <Compile Include="DataBase\CouponCode.cs" />
+    <Compile Include="DataBase\GiftCardCode.cs" />
+    <Compile Include="DataBase\ReadDB.cs" />
+    <Compile Include="DataBase\ReadDBForGiftCard.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reporting\ExtentManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="license" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="extent-config.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('.\packages\NUnit.3.11.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '.\packages\NUnit.3.11.0\build\NUnit.props'))" />
+    <Error Condition="!Exists('.\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '.\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props'))" />
+    <Error Condition="!Exists('.\packages\Selenium.InternetExplorer.WebDriver.3.141.5\build\Selenium.InternetExplorer.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '.\packages\Selenium.InternetExplorer.WebDriver.3.141.5\build\Selenium.InternetExplorer.WebDriver.targets'))" />
+    <Error Condition="!Exists('.\packages\Selenium.Chrome.WebDriver.74.0.0\build\Selenium.Chrome.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '.\packages\Selenium.Chrome.WebDriver.74.0.0\build\Selenium.Chrome.WebDriver.targets'))" />
+    <Error Condition="!Exists('packages\Selenium.Chrome.WebDriver.74.0.0\build\Selenium.Chrome.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Selenium.Chrome.WebDriver.74.0.0\build\Selenium.Chrome.WebDriver.targets'))" />
+    <Error Condition="!Exists('packages\Selenium.InternetExplorer.WebDriver.3.141.5\build\Selenium.InternetExplorer.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Selenium.InternetExplorer.WebDriver.3.141.5\build\Selenium.InternetExplorer.WebDriver.targets'))" />
+  </Target>
+  <Import Project=".\packages\Selenium.InternetExplorer.WebDriver.3.141.5\build\Selenium.InternetExplorer.WebDriver.targets" Condition="Exists('.\packages\Selenium.InternetExplorer.WebDriver.3.141.5\build\Selenium.InternetExplorer.WebDriver.targets')" />
+  <Import Project=".\packages\Selenium.Chrome.WebDriver.74.0.0\build\Selenium.Chrome.WebDriver.targets" Condition="Exists('.\packages\Selenium.Chrome.WebDriver.74.0.0\build\Selenium.Chrome.WebDriver.targets')" />
+  <Import Project="packages\Selenium.Chrome.WebDriver.74.0.0\build\Selenium.Chrome.WebDriver.targets" Condition="Exists('packages\Selenium.Chrome.WebDriver.74.0.0\build\Selenium.Chrome.WebDriver.targets')" />
+  <Import Project="packages\Selenium.InternetExplorer.WebDriver.3.141.5\build\Selenium.InternetExplorer.WebDriver.targets" Condition="Exists('packages\Selenium.InternetExplorer.WebDriver.3.141.5\build\Selenium.InternetExplorer.WebDriver.targets')" />
+</Project>
