@@ -78,7 +78,7 @@ namespace Cinemark.com.cinemark.pages
             //Create COM Objects. Create a COM object for everything that is referenced
             Excel.Application xlApp = new Excel.Application();
             Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(@"C:\Reports\EmailId.xlsx");
-            Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
+            Excel._Worksheet xlWorksheet = (Excel._Worksheet)xlWorkbook.Sheets[1];
             Excel.Range xlRange = xlWorksheet.UsedRange;
 
             int rowCount = xlRange.Rows.Count;
@@ -95,9 +95,10 @@ namespace Cinemark.com.cinemark.pages
                         Console.Write("\r\n");
 
                     //write the value to the console
-                    if (xlRange.Cells[i, j] != null && xlRange.Cells[i, j].Value2 != null)
+                    var cell = xlRange.Cells[i, j];
+                    if (cell != null && cell.Value2 != null)
                     {
-                         output = xlRange.Cells[i, j].Value2.ToString();
+                         output = cell.Value2.ToString();
                         //Console.Write(output + "\t");
                     }
 
