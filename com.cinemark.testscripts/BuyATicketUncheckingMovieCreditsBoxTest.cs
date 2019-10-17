@@ -51,7 +51,7 @@ namespace Cinemark.com.cinemark.testscripts
                 MR.LearnMoreLink();
                 MC.UpdateBillingZip("75093");
                 NM.CreateAccount();
-                NM.AccountInformation(emailId, emailId, "Cinemark1", "Cinemark1");
+                NM.AccountInformation(emailId, emailId, "Cinemark1");
                 NM.PersonalInformation("Auto", "User", "9721111234", "75093");
                 NM.RecurringPaymentInfo(TestData.MCCreditCard, TestData.CardSecurityCode1, TestData.MCZIP);
                 NM.TermsAndConditions();

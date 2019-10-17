@@ -24,8 +24,8 @@ namespace Cinemark.com.cinemark.pages
         [FindsBy(How = How.Id, Using = "Password")]
         private IWebElement UserPassword;
 
-        [FindsBy(How = How.Id, Using = "ConfirmPassword")]
-        private IWebElement ConfirmPassword;
+       /* [FindsBy(How = How.Id, Using = "ConfirmPassword")]
+        private IWebElement ConfirmPassword; */
 
         [FindsBy(How = How.Id, Using = "FirstName")]
         private IWebElement FirstName;
@@ -164,12 +164,12 @@ namespace Cinemark.com.cinemark.pages
       
 
         /*  Account Information  */
-        public void AccountInformation(string Email,string ConfirmEmail, string Pass, string ConfirmPass)
+        public void AccountInformation(string Email,string ConfirmEmail, string Pass)
         {
             EmailAddr.SendKeys(Email);
             ConfirmEmailAddr.SendKeys(ConfirmEmail);
             UserPassword.SendKeys(Pass);
-            ConfirmPassword.SendKeys(ConfirmPass);
+            //ConfirmPassword.SendKeys(ConfirmPass);
 
         }
 

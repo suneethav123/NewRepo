@@ -11,18 +11,17 @@ namespace Cinemark.com.cinemark.pages
 {
     class Utils
     {
-        
-        
+        private static object xlWorkBook;
+        private static object xlRange;
+
+        public static void WaitForLoad(IWebDriver driver, int timeoutSec = 15)
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            WebDriverWait wait = new WebDriverWait(driver, new TimeSpan(0, 0, timeoutSec));
+            wait.Until(wd => js.ExecuteScript("return document.readyState").ToString() == "complete");
+        }
 
 
-         public static void WaitForLoad(IWebDriver driver, int timeoutSec = 15)
-          {
-                IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-                WebDriverWait wait = new WebDriverWait(driver, new TimeSpan(0, 0, timeoutSec));
-                wait.Until(wd => js.ExecuteScript("return document.readyState").ToString() == "complete");
-          }
-
-       
         public static WebDriverWait WaitForElement(IWebDriver driver)
         {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(90));
@@ -80,6 +79,7 @@ namespace Cinemark.com.cinemark.pages
             Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(@"C:\Reports\EmailId.xlsx");
             Excel._Worksheet xlWorksheet = (Excel._Worksheet)xlWorkbook.Sheets[1];
             Excel.Range xlRange = xlWorksheet.UsedRange;
+            string xlString;
 
             int rowCount = xlRange.Rows.Count;
             int colCount = xlRange.Columns.Count;
@@ -95,17 +95,17 @@ namespace Cinemark.com.cinemark.pages
                         Console.Write("\r\n");
 
                     //write the value to the console
-                    var cell = xlRange.Cells[i, j];
-                    if (cell != null && cell.Value2 != null)
+                    if (xlRange.Cells[i, j] != null && (xlRange.Cells[rowCount, colCount] as Excel.Range).Value2 != null)
                     {
-                         output = cell.Value2.ToString();
-                        //Console.Write(output + "\t");
+
+                        output = xlRange.Cells.Value2.ToString();
+                        Console.Write(output + "\t");
                     }
+
 
                 }
             }
-
-            
+    
 
             //cleanup
             GC.Collect();
