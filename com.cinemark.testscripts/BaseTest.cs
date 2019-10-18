@@ -33,11 +33,11 @@ namespace Cinemark.com.cinemark.testscripts
             //driver.Url = "https://usvir04224.usa.cinemark.com:8443/";
         }
 
-      /* [OneTimeTearDown]
+      /* [OneTimeTearDown]*/
          public void CloseBrowser()
            {
                rep.Flush();
                driver.Close();
-           } */
+           } 
     }
 }

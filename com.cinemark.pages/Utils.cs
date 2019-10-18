@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using Excel = Microsoft.Office.Interop.Excel;
 
@@ -46,10 +47,12 @@ namespace Cinemark.com.cinemark.pages
             return numberOfPoints;
         }
 
+  
         public static void WriteOnExcel(string emailID)
         {
-            string myPath = @"C:\Reports\EmailId.xlsx";
-            FileInfo fi = new FileInfo(myPath);
+            //string myPath = @"C:\Reports\EmailId.xlsx";
+           String ExcelPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Excel\\EmailId.xlsx");
+            FileInfo fi = new FileInfo(ExcelPath);
             if (!fi.Exists)
             {
                 Console.Out.WriteLine("file doesn't exists!");
@@ -57,7 +60,7 @@ namespace Cinemark.com.cinemark.pages
             else
             {
                 var excelApp = new Microsoft.Office.Interop.Excel.Application();
-                var workbook = excelApp.Workbooks.Open(myPath);
+                var workbook = excelApp.Workbooks.Open(ExcelPath);
                 Worksheet worksheet = workbook.ActiveSheet as Worksheet;
 
 
@@ -73,10 +76,11 @@ namespace Cinemark.com.cinemark.pages
         public static string GetEmailId()
         {
             string output = null;
+            String ExcelPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Excel\\EmailId.xlsx");
 
             //Create COM Objects. Create a COM object for everything that is referenced
             Excel.Application xlApp = new Excel.Application();
-            Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(@"C:\Reports\EmailId.xlsx");
+            Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(ExcelPath);
             Excel._Worksheet xlWorksheet = (Excel._Worksheet)xlWorkbook.Sheets[1];
             Excel.Range xlRange = xlWorksheet.UsedRange;
             string xlString;

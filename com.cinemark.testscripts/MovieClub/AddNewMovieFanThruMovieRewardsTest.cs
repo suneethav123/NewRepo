@@ -45,10 +45,11 @@ namespace Cinemark.com.cinemark.testscripts
             }
             catch(Exception e)
             {
+                CloseBrowser();
                 test.Log(Status.Fail, "Registered a new Movie Fan account thru Movie Rewards link - Failed");
                 test.Log(Status.Fail, e.ToString());
                 Assert.Fail();
-                
+                           
 
             }
         }
