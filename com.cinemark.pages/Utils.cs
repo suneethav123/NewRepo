@@ -51,12 +51,15 @@ namespace Cinemark.com.cinemark.pages
         public static void WriteOnExcel(string emailID)
         {
             //string myPath = @"C:\Reports\EmailId.xlsx";
-           String ExcelPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Excel\\EmailId.xlsx");
+            //String ExcelPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Excel\\EmailId.xlsx");
+            String ExcelPath = Path.Combine((Directory.GetParent(System.AppDomain.CurrentDomain.BaseDirectory).Parent.FullName),"Excel\\EmailId.xlsx");
+
             FileInfo fi = new FileInfo(ExcelPath);
             if (!fi.Exists)
             {
+                Console.Out.WriteLine(ExcelPath);
                 Console.Out.WriteLine("file doesn't exists!");
-            }
+                     } 
             else
             {
                 var excelApp = new Microsoft.Office.Interop.Excel.Application();
@@ -76,7 +79,7 @@ namespace Cinemark.com.cinemark.pages
         public static string GetEmailId()
         {
             string output = null;
-            String ExcelPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Excel\\EmailId.xlsx");
+            String ExcelPath = Path.Combine((Directory.GetParent(System.AppDomain.CurrentDomain.BaseDirectory).Parent.FullName), "Excel\\EmailId.xlsx");
 
             //Create COM Objects. Create a COM object for everything that is referenced
             Excel.Application xlApp = new Excel.Application();

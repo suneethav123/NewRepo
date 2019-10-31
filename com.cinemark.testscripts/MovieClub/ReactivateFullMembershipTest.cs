@@ -3,7 +3,7 @@ using NUnit.Framework;
 using System;
 using AventStack.ExtentReports;
 
-/* This test reactivates a full movie club membership.
+/* This // test reactivates a full movie club membership.
  * Initially the membership is cancelled ,user does not log out  but  Reactivates membership*/
 
 namespace Cinemark.com.cinemark.testscripts
@@ -23,8 +23,9 @@ namespace Cinemark.com.cinemark.testscripts
         [Obsolete]
         public void ReactivateFullMembership()
         {
-            test = rep.CreateTest("ReactivateFullMembership");
-            try
+            UITest(() =>
+            {
+                try
             {
                 HP = new HomePage(driver);
                 MR = new MovieRewardsInfoPage(driver);
@@ -54,15 +55,16 @@ namespace Cinemark.com.cinemark.testscripts
                 Boolean SuccessMessage = MRP.GetMemberStatusHeadLine().Text.Contains("We");
                 Assert.True(SuccessMessage);
 
-                test.Log(Status.Pass, "Movie Club - Reactivate into Movie Club (full) Passed");
+                 test.Log(Status.Pass, "Movie Club - Reactivate into Movie Club (full) Passed");
 
             }
             catch (Exception e)
             {
-                test.Log(Status.Fail, "Movie Club - Reactivate into Movie Club (full) Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Movie Club - Reactivate into Movie Club (full) Failed");
+                
                 Assert.Fail();
-            }
+                }
+            });
 
         }
 

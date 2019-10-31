@@ -7,7 +7,7 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium;
 
 
-/* This test cancels Lite movie Club membership */
+/* This // test cancels Lite movie Club membership */
 
 namespace Cinemark.com.cinemark.testscripts
 {
@@ -27,8 +27,9 @@ namespace Cinemark.com.cinemark.testscripts
         [Obsolete]
         public void CancelLiteMembership()
         {
-           test = rep.CreateTest("CancelLiteMovieClubMembershipTest");
-            try
+            UITest(() =>
+            {
+                try
             {
                 HP = new HomePage(driver);
                 MR = new MovieRewardsInfoPage(driver);
@@ -64,17 +65,17 @@ namespace Cinemark.com.cinemark.testscripts
                 string ActualMemberStatusMsg = MRP.GetMemberStatusHeadLine().Text;
 
                 Assert.AreEqual(ExpectedMemberStatusMsg, ActualMemberStatusMsg);
-
                 test.Log(Status.Pass, "Cancelled Movie Club Lite membership - Passed");
 
             }
             catch(Exception e)
             {
-                test.Log(Status.Fail, "Cancelled Movie Club Lite membership - Failed");
-                test.Log(Status.Fail, e.ToString());
+               test.Log(Status.Fail, "Cancelled Movie Club Lite membership - Failed");
+                
                 Assert.Fail();
 
-            }
+                }
+            });
 
         }
     }

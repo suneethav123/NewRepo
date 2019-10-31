@@ -11,6 +11,7 @@ namespace Cinemark.com.cinemark.pages
     class NewMovieClubSignIn
     {
         WebDriverWait wait;
+ 
 
         [FindsBy(How = How.Id, Using = "GuestCheckout")]
         private IWebElement CreateAnAcctBtn;
@@ -63,9 +64,9 @@ namespace Cinemark.com.cinemark.pages
         [FindsBy(How = How.XPath, Using = "(//h2[@class= 'top'])[1]")]
         private IWebElement SuccessMessage;
 
-
+  
         [FindsBy(How = How.CssSelector, Using = "#ValidationSummary > ul > li:nth-child(1)")]
-        private IWebElement MessageForDuplicateUser;
+        private IWebElement MessageForDuplicateUser; 
 
         [FindsBy(How = How.LinkText, Using = "Choose Your Movie")]
         private IWebElement ChooseMovieBtn;

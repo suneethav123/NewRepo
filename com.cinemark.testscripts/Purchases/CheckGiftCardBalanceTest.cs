@@ -33,8 +33,9 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
         [Obsolete]
         public void GiftCardBalanceCheck()
         {
-            test = rep.CreateTest("GiftCardBalanceCheck");
-            try
+            UITest(() =>
+            {
+                try
             {
                 HP = new HomePage(driver);
                 SI = new SignInMCM(driver);
@@ -98,14 +99,15 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
                 ActualAmount = ActualAmount.Replace("$", string.Empty);
 
                 Assert.AreEqual(ExpectedAmount, ActualAmount);
-                test.Log(Status.Pass, "Gift card balance is displayed correctly - Passed");
+                 test.Log(Status.Pass, "Gift card balance is displayed correctly - Passed");
             }
             catch(Exception e)
             {
-                test.Log(Status.Fail, "Gift card balance is displayed correctly - failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Gift card balance is displayed correctly - failed");
+              
                 Assert.Fail();
-            }
+                }
+            });
 
         }
     }

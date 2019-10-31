@@ -4,7 +4,7 @@ using System;
 using AventStack.ExtentReports;
 
 
-/* This test is to add a new movie club member and then add a zero dollar ticket thru Theatres */
+/* This // test is to add a new movie club member and then add a zero dollar ticket thru Theatres */
 
 namespace Cinemark.com.cinemark.testscripts
 {
@@ -23,14 +23,15 @@ namespace Cinemark.com.cinemark.testscripts
         private string emailId;
 
 
-        /* Below test adds a new MCM and adds purchases a $0.00 ticket */
+        /* Below // test adds a new MCM and adds purchases a $0.00 ticket */
 
         [Test , Order(1)]
         [Obsolete]
         public void AddZeroDollarTicketThruMovieRewards()
         {
-            test = rep.CreateTest("AddZeroDollarTicketThruMovieRewards");
-            try
+            UITest(() =>
+            {
+                try
             {
                 HP = new HomePage(driver);
                 MR = new MovieRewardsInfoPage(driver);
@@ -66,25 +67,26 @@ namespace Cinemark.com.cinemark.testscripts
                 string ActualTotalSummary = SC.GetTotalPurchaseAmount().Text;
 
                 Assert.AreEqual(ExpectedTotalSummary, ActualTotalSummary);
-                test.Log(Status.Pass, "Successfully added $0.00 ticket  for a Movie Club Member - Passed");
+              test.Log(Status.Pass, "Successfully added $0.00 ticket  for a Movie Club Member - Passed");
             }
             catch(Exception e)
             {
-                test.Log(Status.Fail, "Successfully added $0.00 ticket  for a Movie Club Member - Failed");
-                test.Log(Status.Fail, e.ToString());
+             test.Log(Status.Fail, "Successfully added $0.00 ticket  for a Movie Club Member - Failed");
+              
                 Assert.Fail();
             }
-
+            });
         }
 
 
-        /* Below test checks the user does not get any points when purchased a $0.00 ticket  */
+        /* Below // test checks the user does not get any points when purchased a $0.00 ticket  */
 
         [Test, Order(2)]
         public void PointsEarnedTest()
         {
-            test = rep.CreateTest("PointsEarnedTest");
-            try
+            UITest(() =>
+            {
+                try
             {
                 string ExpectedPointsMsg = "No points earned.";
                 string ActualPointsMsg = NM.GetPointsEarned().Text;
@@ -95,9 +97,9 @@ namespace Cinemark.com.cinemark.testscripts
             catch(Exception e)
             {
                 test.Log(Status.Fail, "No points received for $0.00 ticket purchase - Failed");
-                test.Log(Status.Fail, e.ToString());
-                Assert.Fail();
+                               Assert.Fail();
             }
+            });
 
         }
     }

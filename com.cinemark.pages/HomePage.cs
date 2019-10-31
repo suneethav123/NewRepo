@@ -1,19 +1,23 @@
-﻿using OpenQA.Selenium;
+﻿using Cinemark.com.cinemark.testscripts;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
 using System;
+using NUnit.Framework;
+using Cinemark.Base;
+using Cinemark.Utilities;
 
 //This is the initial landing page where all the links are present
 
 namespace Cinemark.com.cinemark.pages
 {
-    public class HomePage
+    public class HomePage 
     {
        
         WebDriverWait wait;
         private Actions action;
-
+             
 
         [FindsBy(How = How.LinkText, Using = "movie club")]
         private IWebElement MovieClubLink;

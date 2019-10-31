@@ -21,17 +21,17 @@ namespace Cinemark.com.cinemark.testscripts
 
         public static string UpdateBillingZIP = "75093";
 
-        //For test account AutoTest2222@example.com
+        //For // test account AutoTest2222@example.com
         public static string GiftCardNumber1 = "274111791538";
 
-        //For test account AutoTest1010@example.com
+        //For // test account AutoTest1010@example.com
         public static string GiftCardNumber2 = "410411842072";
 
-        //For test account AutoTest4444@example.com
+        //For // test account AutoTest4444@example.com
         public static string GiftCardNumber4 = "269511175250";
 
 
-        //For test account AutoTest5555@example.com.com
+        //For // test account AutoTest5555@example.com.com
         public static string GiftCardNumber3 = "806682818424";
 
 

@@ -7,8 +7,8 @@ using AventStack.ExtentReports;
 using System.Threading;
 
 
-//  This test is reloading Gift Card 
-//  This test validates less than $5 & more than $500 amounts are not allowed to be reloaded.
+//  This // test is reloading Gift Card 
+//  This // test validates less than $5 & more than $500 amounts are not allowed to be reloaded.
 
 namespace Cinemark.com.cinemark.testscripts.Purchases
 {
@@ -25,14 +25,14 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
        
 
 
-        // Trying to Reload < than $5 
+        // trying to Reload < than $5 
 
         [Test, Order(1)]
         [Obsolete]
         public void GiftCardReloadLessThan5()
         {
-            test = rep.CreateTest("GiftCardReloadLessThan5");
-            try
+          
+            UITest(() =>{try
             {
                 HP = new HomePage(driver);
                 SI = new SignInMCM(driver);
@@ -55,27 +55,28 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
 
                 Assert.True(ErrorMessage);
 
-                test.Log(Status.Pass, "Error Message displayed when less than $5 reloaded to Gift card - Passed");
+                 test.Log(Status.Pass, "Error Message displayed when less than $5 reloaded to Gift card - Passed");
             }
             catch(Exception e)
             {
-                test.Log(Status.Fail, "Error Message displayed when less than $5 reloaded to Gift card - Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Error Message displayed when less than $5 reloaded to Gift card - Failed");
+              
                 Assert.Fail();
-            }
-           
+                }
+            });
+
         }
 
 
-        // Trying to Reload > than $5 
+        //trying to Reload > than $5 
 
         [Test, Order(2)]
         [Obsolete]
         public void GiftCardReloadMoreThan500()
         {
-            test = rep.CreateTest("GiftCardReloadMoreThan500");
+         
 
-            try
+            UITest(() =>{try
             {
 
                 RL.ReloadGC("501");
@@ -86,27 +87,28 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
                 Boolean ErrorMessage = RL.GetErrorMsg().Text.Contains("Please enter an amount between $5 and $500.");
 
                 Assert.True(ErrorMessage);
-                test.Log(Status.Pass, "Error Message displayed when more than $500.00 reloaded to Gift card - Passed");
+                 test.Log(Status.Pass, "Error Message displayed when more than $500.00 reloaded to Gift card - Passed");
             }
             catch (Exception e)
             {
-                test.Log(Status.Fail, "Error Message displayed when more than $500.00 reloaded to Gift card - Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Error Message displayed when more than $500.00 reloaded to Gift card - Failed");
+         
                 Assert.Fail();
-            }
+                }
+            });
 
         }
 
 
-        // Trying to Reload  $5 
+        // trying to Reload  $5 
 
         [Test, Order(3)]
         [Obsolete]
         public void GiftCardReload()
         {
-            test = rep.CreateTest("GiftCardReload");
+          
 
-            try
+            UITest(() =>{try
             {
                 NM = new NewMovieClubSignIn(driver);
 
@@ -122,14 +124,15 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
                 string ActualMsg = NM.GetTicketPurchaseSuccessMsg().Text;
 
                 Assert.AreEqual(ExpectedMsg, ActualMsg);
-                test.Log(Status.Pass, "Successfully reloaded $5.00 to Gift card - Passed");
+                 test.Log(Status.Pass, "Successfully reloaded $5.00 to Gift card - Passed");
             }
             catch (Exception e)
             {
-                test.Log(Status.Fail, "Successfully reloaded $5.00 to Gift card - Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Successfully reloaded $5.00 to Gift card - Failed");
+            
                 Assert.Fail();
-            }
+                }
+            });
 
         }
 

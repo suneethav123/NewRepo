@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-// This test is to purchase Supersavers
+// This // test is to purchase Supersavers
 
 namespace Cinemark.com.cinemark.testscripts.Purchases
 {[TestFixture]

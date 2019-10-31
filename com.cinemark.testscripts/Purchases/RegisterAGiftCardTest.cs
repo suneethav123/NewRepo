@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-//  This test registers a gift card to a MCM account
+//  This // test registers a gift card to a MCM account
 
 namespace Cinemark.com.cinemark.testscripts.Purchases
 {[TestFixture]

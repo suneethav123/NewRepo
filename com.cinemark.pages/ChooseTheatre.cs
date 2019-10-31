@@ -23,7 +23,8 @@ namespace Cinemark.com.cinemark.pages
 
 
 
-        [FindsBy(How = How.LinkText, Using = "Theater 944 QA POS 1.25.x")]
+        //[FindsBy(How = How.LinkText, Using = "Theater 944 QA POS 1.25.x")]
+        [FindsBy(How = How.XPath, Using = "//span[contains(text(),'Theater 944 QA POS 1.25.x')]")]
         private IWebElement Theatre944;
 
 

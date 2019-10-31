@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-// This test is to purchase a Reserved Seat for a movie
+// This // test is to purchase a Reserved Seat for a movie
 
 namespace Cinemark.com.cinemark.testscripts.Purchases
 {[TestFixture]
@@ -33,8 +33,9 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
         [Obsolete]
         public void ReservedSeatMovieTickets()
         {
-            test = rep.CreateTest("ReservedSeatMovieTickets");
-            try
+            UITest(() =>
+            {
+                try
             {
 
                 HP = new HomePage(driver);
@@ -66,14 +67,15 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
                 string ActualSuccessMsg = NM.GetTicketPurchaseSuccessMsg().Text;
 
                 Assert.AreEqual(ExpectedSuccessMsg, ActualSuccessMsg);
-                test.Log(Status.Pass, "Successfully Seat Reserved   - Passed");
+                 test.Log(Status.Pass, "Successfully Seat Reserved   - Passed");
             }
             catch (Exception e)
             {
-                test.Log(Status.Fail, "Successfully Seat Reserved - failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Successfully Seat Reserved - failed");
+               
                 Assert.Fail();
-            }
+                }
+            });
 
 
 
@@ -84,8 +86,9 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
         [Obsolete]
         public void RefundReservedSeatTicket()
         {
-            test = rep.CreateTest("RefundReservedSeatTicket");
-            try
+            UITest(() =>
+            {
+                try
             {
                 GS = new GuestServicesPage(driver);
                 GSR = new GuestServicesRefundPage(driver);
@@ -106,9 +109,10 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
             catch(Exception e)
             {
                 test.Log(Status.Fail, "Refund Reserved Seat tickets successfully - Failed");
-                test.Log(Status.Fail, e.ToString());
+               
                 Assert.Fail();
-            }
+                }
+            });
 
 
 

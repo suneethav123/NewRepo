@@ -30,13 +30,13 @@ namespace Cinemark.com.cinemark.testscripts
         private string code;
 
 
-        /*  Below test is to purchase a Movie Club Membership gift card */
+        /*  Below // test is to purchase a Movie Club Membership gift card */
 
         [Test, Order(1)]
         [Obsolete]
         public void GiftCardPurchaseMCM()
         {
-            test = rep.CreateTest("GiftCardPurchaseMCM");
+            // test = rep.CreateTest("GiftCardPurchaseMCM");
             try
             {
                 HP = new HomePage(driver);
@@ -61,26 +61,27 @@ namespace Cinemark.com.cinemark.testscripts
                 code = NM.GetRecipientGiftCode().Text;
 
                 Assert.AreEqual(ExpectedSuccessMsg, ActualSuccessMsg);
-                test.Log(Status.Pass, "Successful Movie Club Gift Membership card Purchase - Passed");
+                // test.Log(Status.Pass, "Successful Movie Club Gift Membership card Purchase - Passed");
             }
             catch(Exception e)
             {
-                test.Log(Status.Fail, "Successful Movie Club Gift Membership card Purchase - Failed");
-                test.Log(Status.Fail, e.ToString());
+                // test.Log(Status.Fail, "Successful Movie Club Gift Membership card Purchase - Failed");
+                // test.Log(Status.Fail, e.ToString());
                 Assert.Fail();
 
             }
         }
 
 
-        /*  Below test is to add a new Movie Club member without using Movie Club Membership gift card */
+        /*  Below // test is to add a new Movie Club member without using Movie Club Membership gift card */
 
         [Test, Order(2)]
         [Obsolete]
         public void AddingNMCMemberThruMovieRewards()
         {
-            test = rep.CreateTest("AddingNMCMemberThruMovieRewards");
-            try
+            UITest(() =>
+            {
+                try
             {
 
                 HP = new HomePage(driver);
@@ -112,10 +113,11 @@ namespace Cinemark.com.cinemark.testscripts
             }
             catch(Exception e)
             {
-                test.Log(Status.Fail, "New Movie Club member added without using Movie Club Membership gift card - Failed");
-                test.Log(Status.Fail, e.ToString());
+              test.Log(Status.Fail, "New Movie Club member added without using Movie Club Membership gift card - Failed");
+               
                 Assert.Fail();
-            }
+                }
+            });
         }
 
         
@@ -125,8 +127,9 @@ namespace Cinemark.com.cinemark.testscripts
         [Obsolete]
         public void BuyTicketsUsingCredits()
         {
-            test = rep.CreateTest("BuyTicketsUsingCredits");
-            try
+            UITest(() =>
+            {
+                try
             {
                 MP = new MovieRewardsPage(driver);
                 FM = new FeaturedMovies(driver);
@@ -153,14 +156,15 @@ namespace Cinemark.com.cinemark.testscripts
                 string ActualSuccessMsg = NM.GetTicketPurchaseSuccessMsg().Text;
 
                 Assert.AreEqual(ExpectedSuccessMsg, ActualSuccessMsg);
-                test.Log(Status.Pass, "Buy ticket using credits recieved from  Movie Club Membership gift card - Passed");
+               test.Log(Status.Pass, "Buy ticket using credits recieved from  Movie Club Membership gift card - Passed");
             }
             catch(Exception e)
             {
                 test.Log(Status.Fail, "Buy ticket using credits recieved from  Movie Club Membership gift card - Failed");
-                test.Log(Status.Fail, e.ToString());
+             
                 Assert.Fail();
-            }
+                }
+            });
         }
 
     }

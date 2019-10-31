@@ -3,7 +3,7 @@ using NUnit.Framework;
 using System;
 using AventStack.ExtentReports;
 
-//This test checks if an existing  Movie Club Member email can be registered again
+//This // test checks if an existing  Movie Club Member email can be registered again
 
 namespace Cinemark.com.cinemark.testscripts
 {
@@ -18,15 +18,16 @@ namespace Cinemark.com.cinemark.testscripts
         private NewMovieClubSignIn NM;
 
 
-        /* This test is checking that existing user is not added again  */
+        /* This // test is checking that existing user is not added again  */
 
         [Test]
         [Obsolete]
         public void DuplicateNewClubMemberAdd()
         {
-            test = rep.CreateTest("DuplicateNewClubMemberAdd");
 
-            try
+            UITest(() =>
+            {
+                try
             {
                 HP = new HomePage(driver);
                 MR = new MovieRewardsInfoPage(driver);
@@ -53,10 +54,10 @@ namespace Cinemark.com.cinemark.testscripts
             }
             catch(Exception e)
             {
-                test.Log(Status.Fail, "Existing Movie Club Member restricted not to be added - Failed");
-                test.Log(Status.Fail, e.ToString());
-                Assert.Fail();
+               test.Log(Status.Fail, "Existing Movie Club Member restricted not to be added - Failed");
+               Assert.Fail();
             }
+            });
         }
 
 

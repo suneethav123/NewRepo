@@ -6,7 +6,7 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium;
 
 
-//  This is a test for missing required fields during ticket purchase
+//  This is a // test for missing required fields during ticket purchase
 
 
 namespace Cinemark.com.cinemark.testscripts.Purchases
@@ -28,9 +28,9 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
         [Obsolete]
         public void ErrMsgsForMissingFieldsValuesCardNum()
         {
-            test = rep.CreateTest("ErrMsgsForMissingFieldsValuesCardNum");
+     
 
-            try
+            UITest(() =>{try
             {
 
                 SI = new SignInMCM(driver);
@@ -70,14 +70,15 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
                     Assert.AreEqual(ExpErrMsgForCodeMissing, ActErrMsgForCodeMissing, "Third Assert");
                 });
 
-                test.Log(Status.Pass, "Error messages displayed for missing Credit Card,ZIP & Security Code - Passed");
+                 test.Log(Status.Pass, "Error messages displayed for missing Credit Card,ZIP & Security Code - Passed");
             }
             catch(Exception e)
             {
-                test.Log(Status.Pass, "Error messages displayed for missing Credit Card,ZIP & Security Code - Passed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Pass, "Error messages displayed for missing Credit Card,ZIP & Security Code - Passed");
+            
                 Assert.Fail();
-            }
+                }
+            });
         }
 
 
@@ -87,9 +88,9 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
         [Test, Order(2)]
         public void ErrorMsgForMissingCCardInfo()
         {
-            test = rep.CreateTest("MissingCreditCardInfo");
+           
 
-            try
+            UITest(() =>{try
             {
                 SC.CCSecurityCode(TestData.CardSecurityCode2);
                 SC.BillingZipCode(TestData.CreditCardZIP);
@@ -100,14 +101,15 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
 
                 Assert.AreEqual(ExpectedErrMsg, ActualErrMsg);
 
-                test.Log(Status.Pass, "Error Message displayed for missing Credit Card - Passed");
+                 test.Log(Status.Pass, "Error Message displayed for missing Credit Card - Passed");
             }
             catch(Exception e)
             {
-                test.Log(Status.Fail, "Error Message displayed for missing Credit Card - Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Error Message displayed for missing Credit Card - Failed");
+             
                 Assert.Fail();
-            }
+                }
+            });
         }
 
 
@@ -116,8 +118,8 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
         [Test, Order(3)]
         public void ErrorMsgForMissingZIPInfo()
         {
-            test = rep.CreateTest("ErrorMsgForMissingZIPInfo");
-            try
+           
+            UITest(() =>{try
             {
                 SC.CreditCardNum(TestData.TicketPurchaseCreditCard);
                 SC.ClearBillingZip();
@@ -129,14 +131,15 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
 
                 Assert.AreEqual(ExpectedErrMsg, ActualErrMsg);
 
-                test.Log(Status.Pass, "Error Message displayed for missing Billing Zipcode - Passed");
+                 test.Log(Status.Pass, "Error Message displayed for missing Billing Zipcode - Passed");
             }
             catch(Exception e)
             {
-                test.Log(Status.Fail, "Error Message displayed for missing Billing Zipcode - Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Error Message displayed for missing Billing Zipcode - Failed");
+             
                 Assert.Fail();
-            }
+                }
+            });
         }
 
 
@@ -145,8 +148,8 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
         [Test, Order(4)]
         public void ErrorMsgForMissingCCAndZIPInfo()
         {
-            test = rep.CreateTest("ErrorMsgForMissingCCAndZIPInfo");
-            try
+            
+            UITest(() =>{try
             {
                 SC.ClearCreditcardNum();
                 SC.ClearBillingZip();
@@ -156,14 +159,15 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
                 Boolean ErrMessageMissingCCZip = SC.GetValidationErrMsgs().Text.Contains("The Billing ZIP Code field is required.");
 
                 Assert.True(ErrMessageMissingCCZip);
-                test.Log(Status.Pass, "Error Message displayed for missing Credit Card Info and Billing Zipcode - Passed");
+                 test.Log(Status.Pass, "Error Message displayed for missing Credit Card Info and Billing Zipcode - Passed");
             }
             catch (Exception e)
             {
-                test.Log(Status.Fail, "Error Message displayed for missing Credit Card Info and Billing Zipcode - Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Error Message displayed for missing Credit Card Info and Billing Zipcode - Failed");
+              
                 Assert.Fail();
-            }
+                }
+            });
 
         }
 

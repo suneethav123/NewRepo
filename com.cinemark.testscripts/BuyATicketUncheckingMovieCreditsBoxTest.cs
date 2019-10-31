@@ -7,7 +7,7 @@ using System.Threading;
 using AventStack.ExtentReports;
 
 
-/*  This test is to buy a movie ticket by Unchecking Apply Credit check box*/
+/*  This // test is to buy a movie ticket by Unchecking Apply Credit check box*/
 
 namespace Cinemark.com.cinemark.testscripts
 {
@@ -27,14 +27,15 @@ namespace Cinemark.com.cinemark.testscripts
 
         
 
-        /*  This test adds a new Movie Club Member & Check Online fees are $0.00 for MCM   */
+        /*  This // test adds a new Movie Club Member & Check Online fees are $0.00 for MCM   */
 
         [Test, Order(1)]
         [Obsolete]
         public void PurchaseATicketUsingNewMCMCredits()
         {
-            test = rep.CreateTest("PurchaseATicketUsingNewMCMCredits");
-            try
+            UITest(() =>
+            {
+                try
             {
                 HP = new HomePage(driver);
                 MR = new MovieRewardsInfoPage(driver);
@@ -76,51 +77,55 @@ namespace Cinemark.com.cinemark.testscripts
                 string ActualSuccessMsg = NM.GetTicketPurchaseSuccessMsg().Text;
 
                 Assert.AreEqual(ExpectedSuccessMsg, ActualSuccessMsg);
-                test.Log(Status.Pass, "Successful Ticket purchase - Passed");
+               test.Log(Status.Pass, "Successful Ticket purchase - Passed");
             }
             catch (Exception e)
             {
-                test.Log(Status.Fail, "Successful Ticket purchase - Failed");
-                test.Log(Status.Fail, e.ToString());
+              test.Log(Status.Fail, "Successful Ticket purchase - Failed");
+              
                 Assert.Fail();
             }
+            });
         }
 
 
 
         
 
-        /* This test is making sure Confirmation Number is displayed */
+        /* This // test is making sure Confirmation Number is displayed */
 
         [Test ,Order(2)]
         public void TicketConfirmationNumber()
         {
-            test = rep.CreateTest("TicketConfirmationNumber");
-            try
+            UITest(() =>
+            {
+                try
             {
                 string ExpectedConfirmationMsg = "Confirmation Number";
                 string ActualConfirmationMsg = NM.GetTicketConfirmationNumber().Text;
 
                 Assert.AreEqual(ExpectedConfirmationMsg, ActualConfirmationMsg);
-                test.Log(Status.Pass, "Ticket Confirmation Number displayed - Passed");
+               test.Log(Status.Pass, "Ticket Confirmation Number displayed - Passed");
             }
             catch(Exception e)
             {
-                test.Log(Status.Fail, "Ticket Confirmation Number displayed - Failed");
-                test.Log(Status.Fail, e.ToString());
+              test.Log(Status.Fail, "Ticket Confirmation Number displayed - Failed");
+             
                 Assert.Fail();
             }
+            });
         }
 
 
-        /*  This test is to check full price is added when Apply Credits is unchecked */
+        /*  This // test is to check full price is added when Apply Credits is unchecked */
 
         [Test, Order(3)]
         [Obsolete]
         public void TicketPricesWithNoCredit()
         {
-            test = rep.CreateTest("TicketPricesWithNoCredit");
-            try
+            UITest(() =>
+            {
+                try
             {
 
                 string ExpectedMovieTicketsPrice = "$" + TestData.MovieTicketFullPrice;
@@ -129,14 +134,15 @@ namespace Cinemark.com.cinemark.testscripts
                 string ActualMovieTicketsPrice = SC.GetPriceWithNoCredits().Text;
 
                 Assert.AreEqual(ExpectedMovieTicketsPrice, ActualMovieTicketsPrice);
-                test.Log(Status.Pass, "Full price is added when Apply Credits is unchecked - Passed");
+               test.Log(Status.Pass, "Full price is added when Apply Credits is unchecked - Passed");
             }
             catch(Exception e)
             {
-                test.Log(Status.Fail, "Full price is added when Apply Credits is unchecked - Failed");
-                test.Log(Status.Fail, e.ToString());
+               test.Log(Status.Fail, "Full price is added when Apply Credits is unchecked - Failed");
+                
                 Assert.Fail();
             }
+            });
         }
 
 

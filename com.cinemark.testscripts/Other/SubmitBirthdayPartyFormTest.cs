@@ -4,9 +4,9 @@ using NUnit.Framework;
 using System;
 
 
-// This test is to submit Birthday Party Form
+// This // test is to submit Birthday Party Form
 
-//namespace Cinemark.com.cinemark.testscripts.Other
+//namespace Cinemark.com.cinemark.// testscripts.Other
 //{[TestFixture]
 //    class SubmitBirthdayPartyFormTest : BaseTest
 //    {
@@ -19,7 +19,7 @@ using System;
 //        [Obsolete]
 //        public void BirthdayPartyFormSubmission()
 //        {
-//            test = rep.CreateTest("BirthdayPartyFormSubmission");
+//            // test = rep.CreateTest("BirthdayPartyFormSubmission");
 //            try
 //            {
 //                FP = new FooterLinksPage(driver);
@@ -33,13 +33,13 @@ using System;
 //                Boolean SubmitMsg = PS.GetSubmitMsg().Displayed;
 
 //                Assert.IsTrue(SubmitMsg);
-//                test.Log(Status.Pass, "Birthday Party form successfully submited - Passed");
+//                // test.Log(Status.Pass, "Birthday Party form successfully submited - Passed");
                 
 //            }
 //            catch(Exception e)
 //            {
-//                test.Log(Status.Fail, "Birthday Party form successfully submited - Failed");
-//                test.Log(Status.Fail, e.ToString());
+//                // test.Log(Status.Fail, "Birthday Party form successfully submited - Failed");
+//                // test.Log(Status.Fail, e.ToString());
 //                Assert.Fail();
 
 //            }

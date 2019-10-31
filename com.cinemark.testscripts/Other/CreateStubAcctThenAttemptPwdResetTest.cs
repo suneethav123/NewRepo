@@ -3,7 +3,7 @@ using Cinemark.com.cinemark.pages;
 using NUnit.Framework;
 using System;
 
-// This test covers Stub account creation & request to password reset 
+// This // test covers Stub account creation & request to password reset 
 // User should not receive an email when a password reset request is sent
 
 namespace Cinemark.com.cinemark.testscripts.Other
@@ -25,8 +25,9 @@ namespace Cinemark.com.cinemark.testscripts.Other
         [Obsolete]
         public void CreateStubAcctThenAttemptPwdReset()
         {
-            test = rep.CreateTest("CreateStubAcctThenAttemptPwdReset");
-            try
+            UITest(() =>
+            {
+                try
             {
                 HP = new HomePage(driver);
                 FM = new FeaturedMovies(driver);
@@ -60,14 +61,15 @@ namespace Cinemark.com.cinemark.testscripts.Other
                 string ActualMsg = RP.GetResetMsg().Text;
 
                 Assert.AreEqual(ExpectedMsg, ActualMsg);
-                test.Log(Status.Pass, "Reset Password link is not sent to the Stub account customer - Passed");
+                 test.Log(Status.Pass, "Reset Password link is not sent to the Stub account customer - Passed");
             }
             catch(Exception e)
             {
-                test.Log(Status.Fail, "Reset Password link is not sent to the Stub account customer - Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Reset Password link is not sent to the Stub account customer - Failed");
+               
                 Assert.Fail();
-            }
+                }
+            });
 
 
         }

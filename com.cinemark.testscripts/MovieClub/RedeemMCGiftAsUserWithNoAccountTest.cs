@@ -3,7 +3,7 @@ using NUnit.Framework;
 using System;
 using AventStack.ExtentReports;
 
-/*  This test uses the Movie Club Gift membeship code to add a new Movie club member */
+/*  This // test uses the Movie Club Gift membeship code to add a new Movie club member */
 
 namespace Cinemark.com.cinemark.testscripts
 {
@@ -24,7 +24,7 @@ namespace Cinemark.com.cinemark.testscripts
         private string email;
         private string code;
 
-        /*  Below test is to get a Movie Club Gift Membership */
+        /*  Below // test is to get a Movie Club Gift Membership */
 
         [Test, Order(1)]
         [Obsolete]
@@ -58,14 +58,14 @@ namespace Cinemark.com.cinemark.testscripts
         }
 
 
-        /*  Below test is using the Recipient Gift Code from the above test & adding a new Movie Club Member*/
+        /*  Below // test is using the Recipient Gift Code from the above // test & adding a new Movie Club Member*/
 
         [Test, Order(2)]
         [Obsolete]
         public void RegisterMCMUsingGiftCard()
         {
-            test = rep.CreateTest("RegisterMCMUsingGiftCard");
-            try
+           
+            UITest(() =>{try  
             {
                 MR = new MovieRewardsInfoPage(driver);
                 MC = new MovieClub(driver);
@@ -87,26 +87,27 @@ namespace Cinemark.com.cinemark.testscripts
                 string ActualMsg = NM.GetTicketPurchaseSuccessMsg().Text;
 
                 Assert.AreEqual(ExpectedMsg, ActualMsg);
-                test.Log(Status.Pass, "Movie Club Membership Gift Code successfully used to register a new Movie Club member Passed");
+                 test.Log(Status.Pass, "Movie Club Membership Gift Code successfully used to register a new Movie Club member Passed");
             }
             catch (Exception e)
             {
-                test.Log(Status.Fail, "Movie Club Membership Gift Code successfully used to register a new Movie Club member Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Movie Club Membership Gift Code successfully used to register a new Movie Club member Failed");
+             
                 Assert.Fail();
             }
+            });
 
         }
 
 
-        /*  Below test is checking the Total is $0.00*/
+        /*  Below // test is checking the Total is $0.00*/
 
         [Test, Order(3)]
         [Obsolete]
         public void TotalAmount()
         {
-            test = rep.CreateTest("TotalAmount");
-            try
+        
+            UITest(() =>{try  
             {
                 SC = new ShoppingCart(driver);
 
@@ -114,15 +115,16 @@ namespace Cinemark.com.cinemark.testscripts
                 string ActualTotalSummary = SC.GetTotalPurchaseAmount().Text;
 
                 Assert.AreEqual(ExpectedTotalSummary, ActualTotalSummary);
-                test.Log(Status.Pass, "Checking Final amount is $0.00 when Movie Club Membership Gift Code is successfully used to register a new Movie Club member Passed");
+                 test.Log(Status.Pass, "Checking Final amount is $0.00 when Movie Club Membership Gift Code is successfully used to register a new Movie Club member Passed");
             }
             catch (Exception e)
             {
-                test.Log(Status.Fail, "Checking Final amount is $0.00 when Movie Club Membership Gift Code is successfully used to register a new Movie Club member Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Checking Final amount is $0.00 when Movie Club Membership Gift Code is successfully used to register a new Movie Club member Failed");
+               
                 Assert.Fail();
             }
-        }
+            });
+            }
 
     }
 }

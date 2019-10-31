@@ -6,7 +6,7 @@ using System;
 using AventStack.ExtentReports;
 using System.Threading;
 
-//This test adds a new Movie club member ,buys 2 tickets & refunds them back
+//This // test adds a new Movie club member ,buys 2 tickets & refunds them back
 
 
 namespace Cinemark.com.cinemark.testscripts.Purchases
@@ -33,8 +33,9 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
         [Obsolete]
         public void RefundTickets()
         {
-            test = rep.CreateTest("RefundTickets");
-            try
+            UITest(() =>
+            {
+                try
             {
 
                 HP = new HomePage(driver);
@@ -105,15 +106,16 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
                 string ActualMsg = GSR.GetRefundSuccessMsg().Text;
 
                 Assert.AreEqual(ExpectedMsg, ActualMsg);
-                test.Log(Status.Pass, "Successfully refunded the tickets - Passed");
+                //est.Log(Status.Pass, "Successfully refunded the tickets - Passed");
 
             }
             catch(Exception e)
             {
-                test.Log(Status.Fail, "Successfully refunded the tickets - Failed");
-                test.Log(Status.Fail,  e.ToString());
+                //est.Log(Status.Fail, "Successfully refunded the tickets - Failed");
+              
                 Assert.Fail();
-            }
+                }
+            });
 
 
         }
@@ -122,21 +124,23 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
         [Test,Order(2)]
         public void RefundedAmountValidation()
         {
-            test = rep.CreateTest("RefundedAmountValidation");
-            try
+            UITest(() =>
+            {
+                try
             {
                 string ExpectedRefundedAmt = AmountCharged;
                 string ActualRefundedAmt = GSR.GetRefundAmount().Text;
 
                 Assert.AreEqual(ExpectedRefundedAmt, ActualRefundedAmt);
-                test.Log(Status.Pass, "Refunded amount correctly - Passed");
+                 test.Log(Status.Pass, "Refunded amount correctly - Passed");
             }
             catch(Exception e)
             {
-                test.Log(Status.Fail, "Refunded amount correctly - Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Refunded amount correctly - Failed");
+                
                 Assert.Fail();
-            }
+                }
+            });
         }
     }
 }

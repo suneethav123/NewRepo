@@ -6,7 +6,7 @@ using System;
 using System.Threading;
 using AventStack.ExtentReports;
 
-//This test creates a new Movie Club Member and then adds 2 tickets to check if Movie credit ,Movie AddOn and Online Fees are displayed correctly
+//This // test creates a new Movie Club Member and then adds 2 tickets to check if Movie credit ,Movie AddOn and Online Fees are displayed correctly
 
 namespace Cinemark.com.cinemark.testscripts
 {
@@ -25,14 +25,15 @@ namespace Cinemark.com.cinemark.testscripts
         private string emailId;
 
 
-        /*  This test adds a New MCM & checks if Movie Credit price is applied */
+        /*  This // test adds a New MCM & checks if Movie Credit price is applied */
 
         [Test, Order(1)]
         [Obsolete]
         public void BuyATicketUsingNewMCMCredits()
         {
-            test = rep.CreateTest("BuyATicketUsingNewMCMCredits");
-            try
+            UITest(() =>
+            {
+                try
             {
 
                 HP = new HomePage(driver);
@@ -81,23 +82,26 @@ namespace Cinemark.com.cinemark.testscripts
             catch(Exception e)
             {
                 test.Log(Status.Fail, "Buying a ticket using Movie credit - Failed");
-                test.Log(Status.Fail, e.ToString());
+             
                 Assert.Fail();
 
             }
+            });
 
         }
 
 
-        /* This test is for Movie Club Add On ticket */
+        /* This // test is for Movie Club Add On ticket */
 
         [Test, Order(2)]
         [Obsolete]
         public void MovieClubAddOnTicket()
         {
-            test = rep.CreateTest("MovieClubAddOnTicket");
-            try
+            UITest(() =>
             {
+
+                try
+                {
 
                 string ExpectedMovieClubAddOnTicketPrice = "$" + TestData.MovieClubAddOnTicketPrice;
 
@@ -105,37 +109,41 @@ namespace Cinemark.com.cinemark.testscripts
                 string ActualMovieClubAddOnTicketPrice = SC.GetMovieClubAddOn().Text;
 
                 Assert.AreEqual(ExpectedMovieClubAddOnTicketPrice, ActualMovieClubAddOnTicketPrice);
-                test.Log(Status.Pass, "Add On Ticket Price is correct - Passed");
+               test.Log(Status.Pass, "Add On Ticket Price is correct - Passed");
             }
             catch(Exception e)
             {
-                test.Log(Status.Fail, "Add On Ticket Price is correct - Failed");
-                test.Log(Status.Fail, e.ToString());
+               test.Log(Status.Fail, "Add On Ticket Price is correct - Failed");
+               
                 Assert.Fail();
-            }
+                }
+            });
         }
 
 
-        /* This test is for MCM Online fees */
+        /* This // test is for MCM Online fees */
 
         [Test, Order(3)]
         public void OnLineFeesForMovieClubMember()
         {
-            test = rep.CreateTest("OnLineFeesForMovieClubMember");
-            try
+            UITest(() =>
             {
+
+                try
+                {
                 string ExpectedOnlineFees = "$" + TestData.MovieClubOnlineFees;
                 string ActualOnlineFees = SC.GetMovieClubMemberOnlineFees().Text;
 
                 Assert.AreEqual(ExpectedOnlineFees, ActualOnlineFees);
-                test.Log(Status.Pass, "Online fees for Movie Club member is $0.00 - Passed");
+               test.Log(Status.Pass, "Online fees for Movie Club member is $0.00 - Passed");
             }
             catch(Exception e)
             {
-                test.Log(Status.Fail, "Online fees for Movie Club member is $0.00 - Failed");
-                test.Log(Status.Fail, e.ToString());
+               test.Log(Status.Fail, "Online fees for Movie Club member is $0.00 - Failed");
+              
                 Assert.Fail();
-            }
+                }
+            });
         }
 
 

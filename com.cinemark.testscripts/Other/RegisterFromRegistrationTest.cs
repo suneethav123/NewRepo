@@ -4,7 +4,7 @@ using NUnit.Framework;
 using System;
 
 
-// This test registers a new account using registration page
+// This // test registers a new account using registration page
 
 namespace Cinemark.com.cinemark.testscripts.Other
 {[TestFixture]
@@ -21,8 +21,9 @@ namespace Cinemark.com.cinemark.testscripts.Other
         [Obsolete]
         public void RegisterAccount()
         {
-            test = rep.CreateTest("RegisterAccount");
-            try { 
+            UITest(() =>
+            {
+                try { 
                 HP = new HomePage(driver);
                 RN = new RegisterANewAcctPage(driver);
                 SI = new SignInMCM(driver);
@@ -43,10 +44,11 @@ namespace Cinemark.com.cinemark.testscripts.Other
             }
             catch(Exception e)
                 {
-                test.Log(Status.Fail, "Registered Account Member successfully thru Registration page - Failed");
-                test.Log(Status.Fail, e.ToString());
+               test.Log(Status.Fail, "Registered Account Member successfully thru Registration page - Failed");
+               
                 Assert.Fail();
                 }
-}
+            });
+        }
     }
 }

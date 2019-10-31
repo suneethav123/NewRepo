@@ -6,7 +6,7 @@ using OpenQA.Selenium.Support.UI;
 using System;
 
 
-//This test checks if an existing  Movie Club Member email can be registered again thru Registration page
+//This // test checks if an existing  Movie Club Member email can be registered again thru Registration page
 
 namespace Cinemark.com.cinemark.testscripts.Other
 {
@@ -24,8 +24,9 @@ namespace Cinemark.com.cinemark.testscripts.Other
         [Obsolete]
         public void RegisterDuplicateAccount()
         {
-            test = rep.CreateTest("RegisterDuplicateAccount");
-            try
+            UITest(() =>
+            {
+                try
             {
                 HP = new HomePage(driver);
                 SI = new SignInMCM(driver);
@@ -47,14 +48,15 @@ namespace Cinemark.com.cinemark.testscripts.Other
 
 
                 Assert.AreEqual(ExpectedErrMessage, ActualErrMessage);
-                test.Log(Status.Pass, "Existing Movie Club Member restricted not to be added - Passed");
+              test.Log(Status.Pass, "Existing Movie Club Member restricted not to be added - Passed");
             }
             catch (Exception e)
             {
-                test.Log(Status.Fail, "Existing Movie Club Member restricted not to be added - Failed");
-                test.Log(Status.Fail, e.ToString());
+               test.Log(Status.Fail, "Existing Movie Club Member restricted not to be added - Failed");
+           
                 Assert.Fail();
-            }
-}
+                }
+            });
+        }
     }
 }

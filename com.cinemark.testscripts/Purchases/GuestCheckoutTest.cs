@@ -3,7 +3,7 @@ using NUnit.Framework;
 using System;
 using AventStack.ExtentReports;
 
-//This test is to buy tickets using Guest check out
+//This // test is to buy tickets using Guest check out
 
 namespace Cinemark.com.cinemark.testscripts.Purchases
 {
@@ -23,8 +23,9 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
         [Obsolete]
         public void GuestCheckout()
         {
-            test = rep.CreateTest("GuestCheckout");
-            try
+            UITest(() =>
+            {
+                try
             {
                 HP = new HomePage(driver);
                 FM = new FeaturedMovies(driver);
@@ -51,14 +52,15 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
                 string ActualMsg = NM.GetTicketPurchaseSuccessMsg().Text;
 
                 Assert.AreEqual(ExpectedMsg, ActualMsg);
-                test.Log(Status.Pass, "Successfully tickets purchased using Guest Checkout - Passed");
+                 test.Log(Status.Pass, "Successfully tickets purchased using Guest Checkout - Passed");
             }
             catch(Exception e)
             {
-                test.Log(Status.Fail, "Successfully tickets purchased using Guest Checkout - Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Successfully tickets purchased using Guest Checkout - Failed");
+             
                 Assert.Fail();
-            }
+                }
+            });
 
 
         }

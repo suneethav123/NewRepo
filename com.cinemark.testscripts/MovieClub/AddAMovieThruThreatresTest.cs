@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using System;
 
-// This test is to add tickets when navigated thru Theatres
+// This // test is to add tickets when navigated thru Theatres
 
 namespace Cinemark.com.cinemark.testscripts
 {
@@ -21,7 +21,9 @@ namespace Cinemark.com.cinemark.testscripts
         [Obsolete]
         public void TicketTest()
         {
-            HP = new HomePage(driver);
+            UITest(() =>
+            {
+                HP = new HomePage(driver);
             CT = new ChooseTheatre(driver);
             TF = new TheatreFeaturedMovies(driver);
             TS = new TimeSlots(driver);
@@ -34,6 +36,7 @@ namespace Cinemark.com.cinemark.testscripts
             TS.VirtualRealityMovieTimeSelection();
             ST.AddOneTicket();
             ST.AddTicketsToCart();
+            });
         }
 
         

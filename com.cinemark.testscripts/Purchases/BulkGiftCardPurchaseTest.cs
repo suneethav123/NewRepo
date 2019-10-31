@@ -7,7 +7,7 @@ using AventStack.ExtentReports;
 using System.Threading;
 
 
-//   This test is for Bulk Gift Card Purchase 
+//   This // test is for Bulk Gift Card Purchase 
 //   Validate Error messages when Bulk Gift card count is less than 10
 //   Cannot Purchase Tickets & Bulk Gift Cards in the same transaction
 
@@ -27,15 +27,15 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
         private ShoppingCart SC;
 
         
-        // This test is for Bulk Gift cards < 10 count
+        // This // test is for Bulk Gift cards < 10 count
         // User should not be allowed to purchase Bulk Gift cards less than 10
 
         [Test, Order(1)]
         [Obsolete]
         public void BulkGiftCardPurchaseLessThan10()
         {
-            test = rep.CreateTest("BulkGiftCardPurchaseLessThan10");
-            try
+          
+            UITest(() =>{try
             {
                 HP = new HomePage(driver);
                 GP = new GiftsPage(driver);
@@ -49,26 +49,27 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
                 string ActualErrMsg = BGC.GetErrorMessage().Text;
 
                 Assert.AreEqual(ExpectedErrMsg, ActualErrMsg);
-                test.Log(Status.Pass, "Cannot buy less than 10 Bulk Gift Cards - Passed");
+                 test.Log(Status.Pass, "Cannot buy less than 10 Bulk Gift Cards - Passed");
             }
             catch(Exception e)
             {
                 test.Log(Status.Fail, "Cannot buy less than 10 Bulk Gift Cards - Passed");
-                test.Log(Status.Fail, e.ToString());
+               
                 Assert.Fail();
-            }
+                }
+            });
 
         }
 
 
-        // This test is to add 10 Bulk Gift Cards successfully
+        // This // test is to add 10 Bulk Gift Cards successfully
 
         [Test, Order(2)]
         [Obsolete]
         public void BulkGiftCardPurchase()
         {
-            test = rep.CreateTest("BulkGiftCardPurchase");
-            try
+          
+            UITest(() =>{try
             {
                 SGC = new ShoppingCartGuestCheckout(driver);
                 SC = new ShoppingCart(driver);
@@ -89,27 +90,28 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
                 string ActualErrMsg = NM.GetTicketPurchaseSuccessMsg().Text;
 
                 Assert.AreEqual(ExpectedErrMsg, ActualErrMsg);
-                test.Log(Status.Pass, "Successfully purchased Bulk Gift Cards - Passed");
+               test.Log(Status.Pass, "Successfully purchased Bulk Gift Cards - Passed");
 
             }
             catch(Exception e)
             {
                 test.Log(Status.Fail, "Successfully purchased Bulk Gift Cards - Failed");
-                test.Log(Status.Fail, e.ToString());
+               
                 Assert.Fail();
-            }
+                }
+            });
 
         }
 
 
-        //  This test is to check user is not able to purchase Tickets & Bulk Gift cards in the same transaction
+        //  This // test is to check user is not able to purchase Tickets & Bulk Gift cards in the same transaction
 
         [Test, Order(3)]
         [Obsolete]
         public void PurchaseTicketsAndBulkGiftCards()
         {
-            test = rep.CreateTest("PurchaseTicketsAndBulkGiftCards");
-            try
+      
+            UITest(() =>{try
             {
 
                 FM = new FeaturedMovies(driver);
@@ -138,10 +140,11 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
             }
             catch(Exception e)
             {
-                test.Log(Status.Fail, "Error displayed when tickets & Bulk Gift cards purchased in the same transaction - Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Error displayed when tickets & Bulk Gift cards purchased in the same transaction - Failed");
+                 test.Log(Status.Fail, e.ToString());
                 Assert.Fail();
-            }
+                }
+            });
 
 
 

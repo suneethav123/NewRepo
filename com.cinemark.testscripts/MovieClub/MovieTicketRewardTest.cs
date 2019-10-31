@@ -6,7 +6,7 @@ using AventStack.ExtentReports;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium;
 
-// This test is to add a Movie Reward Coupon & make sure Credits , Rewards, points ,Tickets are displayed correctly
+// This // test is to add a Movie Reward Coupon & make sure Credits , Rewards, points ,Tickets are displayed correctly
 
 namespace Cinemark.com.cinemark.testscripts
 {
@@ -26,8 +26,8 @@ namespace Cinemark.com.cinemark.testscripts
         [Obsolete]
         public void CreditsRecievedForMovieRewardTest()
         {
-            test = rep.CreateTest("CreditsRecievedForMovieRewardTest");
-            try
+         
+            UITest(() =>{try 
             {
                 HP = new HomePage(driver);
                 MR = new MovieRewardsInfoPage(driver);
@@ -50,10 +50,11 @@ namespace Cinemark.com.cinemark.testscripts
             }
             catch (Exception e)
             {
-                test.Log(Status.Fail, "Credits recieved for Movie Rewards Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Credits recieved for Movie Rewards Failed");
+                
                 Assert.Fail();
-            }
+                }
+            });
 
 
         }
@@ -62,29 +63,30 @@ namespace Cinemark.com.cinemark.testscripts
         [Obsolete]
         public void RewardReceivedForMovieRewardTest()
         {
-            test = rep.CreateTest("RewardReceivedForMovieRewardTest");
-            try
+           
+            UITest(() =>{try 
             {
                 string ExpectedRewards = "1";
             string ActualRewards = MF.GetCheckingRewards().Text;
 
             Assert.AreEqual(ExpectedRewards, ActualRewards);
-                test.Log(Status.Pass, "Rewards recieved for Movie Rewards Passed");
+               test.Log(Status.Pass, "Rewards recieved for Movie Rewards Passed");
             }
             catch (Exception e)
             {
-                test.Log(Status.Fail, "Rewards recieved for Movie Rewards Failed");
-                test.Log(Status.Fail, e.ToString());
+               test.Log(Status.Fail, "Rewards recieved for Movie Rewards Failed");
+            
                 Assert.Fail();
-            }
+                }
+            });
         }
 
         [Test, Order(3)]
         [Obsolete]
         public void PointsUsedForMovieRewardTest()
         {
-            test = rep.CreateTest("PointsUsedForMovieRewardTest");
-            try
+         
+            UITest(() =>{try 
             {
 
                 string ExpectedPoints = "469";
@@ -96,18 +98,19 @@ namespace Cinemark.com.cinemark.testscripts
             }
             catch (Exception e)
             {
-                test.Log(Status.Fail, "Points recieved for Movie Rewards Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Points recieved for Movie Rewards Failed");
+          
                 Assert.Fail();
-            }
+                }
+            });
         }
 
         [Test, Order(4)]
         [Obsolete]
         public void TicketsDisplayedForMovieRewardsTest()
         {
-            test = rep.CreateTest("TicketsDisplayedForMovieRewardsTest");
-            try
+         
+            UITest(() =>{try 
             {
                 Thread.Sleep(2000);
 
@@ -115,15 +118,16 @@ namespace Cinemark.com.cinemark.testscripts
             string ActualTickets = MF.GetCheckingTickets().Text;
 
             Assert.AreEqual(ExpectedTickets, ActualTickets);
-            test.Log(Status.Pass, "Tickets recieved for Movie Rewards Passed");
+             test.Log(Status.Pass, "Tickets recieved for Movie Rewards Passed");
         }
             catch (Exception e)
             {
-                test.Log(Status.Fail, "Tickets recieved for Movie Rewards Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Tickets recieved for Movie Rewards Failed");
+            
                 Assert.Fail();
-            }
-} 
+                }
+            });
+        } 
 
 
 

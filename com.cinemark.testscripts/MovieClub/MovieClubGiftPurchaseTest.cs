@@ -3,7 +3,7 @@ using NUnit.Framework;
 using System;
 using AventStack.ExtentReports;
 
-/*  In this test Movie Club Gift Membership is purchased */
+/*  In this // test Movie Club Gift Membership is purchased */
 
 namespace Cinemark.com.cinemark.testscripts
 {
@@ -22,15 +22,17 @@ namespace Cinemark.com.cinemark.testscripts
         private string email;
         private string code;
 
-        /*  Below test is to get a Movie Club Gift Membership */
+        /*  Below // test is to get a Movie Club Gift Membership */
 
         [Test, Order(1)]
         [Obsolete]
         public void PurchaseMCGift()
         {
-            test = rep.CreateTest("PurchaseMCGift");
-            try
+            UITest(() =>
             {
+
+                try
+                {
                 HP = new HomePage(driver);
                 GP = new GiftsPage(driver);
                 MCG = new MovieClubGiftMembershipPage(driver);
@@ -54,15 +56,16 @@ namespace Cinemark.com.cinemark.testscripts
 
                 Assert.AreEqual(ExpectedSuccessMsg, ActualSuccessMsg);
 
-                test.Log(Status.Pass, " Purchased Movie Club Gift Membership successfully - Passed");
+                 test.Log(Status.Pass, " Purchased Movie Club Gift Membership successfully - Passed");
 
             }
             catch (Exception e)
             {
-                test.Log(Status.Fail, "Purchase Movie Club Gift Membership successfully- Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Purchase Movie Club Gift Membership successfully- Failed");
+               
                 Assert.Fail();
-            }
+                }
+            });
         }
 
                

@@ -4,7 +4,7 @@ using NUnit.Framework;
 using System;
 
 
-// This test checks an email is sent to the customer with Reset password link
+// This // test checks an email is sent to the customer with Reset password link
 
 namespace Cinemark.com.cinemark.testscripts.Other
 {[TestFixture]
@@ -19,8 +19,9 @@ namespace Cinemark.com.cinemark.testscripts.Other
         [Obsolete]
         public void ResetPasswordRequest()
         {
-            test = rep.CreateTest("ResetPasswordRequest");
-            try
+            UITest(() =>
+            {
+                try
             {
                 HP = new HomePage(driver);
                 SI = new SignInMCM(driver);
@@ -35,16 +36,17 @@ namespace Cinemark.com.cinemark.testscripts.Other
                 string ActualMsg = RP.GetResetMsg().Text;
 
                 Assert.AreEqual(ExpectedMsg, ActualMsg);
-                test.Log(Status.Pass,"Reset Password link is sent successfully to the customer - Passed");
+               test.Log(Status.Pass,"Reset Password link is sent successfully to the customer - Passed");
 
             }
             catch(Exception e)
             {
-                test.Log(Status.Fail, "Reset Password link is sent successfully to the customer - Failed");
-                test.Log(Status.Fail, e.ToString());
+              test.Log(Status.Fail, "Reset Password link is sent successfully to the customer - Failed");
+             
                 Assert.Fail();
 
-            }
+                }
+            });
 
         }
     }

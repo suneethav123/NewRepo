@@ -9,7 +9,7 @@ namespace Cinemark.com.cinemark.pages
 {
     class MovieRewardsInfoPage
     {
-
+       
         /* [FindsBy(How = How.LinkText, Using = "Learn More")]
          private IWebElement lnkLearnMore; */
 

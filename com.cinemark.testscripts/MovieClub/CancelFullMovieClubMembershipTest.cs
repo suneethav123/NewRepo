@@ -4,7 +4,7 @@ using System;
 using AventStack.ExtentReports;
 
 
-/*  This test cancels full movie club membership*/
+/*  This // test cancels full movie club membership*/
 
 namespace Cinemark.com.cinemark.testscripts
 {
@@ -23,8 +23,10 @@ namespace Cinemark.com.cinemark.testscripts
         [Obsolete]
         public void CancelFullMembership()
         {
-            test = rep.CreateTest("CancelFullMembership");
-            try
+
+            UITest(() =>
+            {
+                try
             {
 
                 HP = new HomePage(driver);
@@ -56,16 +58,17 @@ namespace Cinemark.com.cinemark.testscripts
 
                 Assert.AreEqual(ExpectedMemberStatusMsg, ActualMemberStatusMsg);
 
-                test.Log(Status.Pass, "Cancelled Movie Club Full membership - Passed");
+             test.Log(Status.Pass, "Cancelled Movie Club Full membership - Passed");
 
             }
             catch(Exception e)
             {
-                test.Log(Status.Fail, "Cancelled Movie Club Full membership - Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Cancelled Movie Club Full membership - Failed");
+             
                 Assert.Fail();
 
-            }
+                }
+            });
 
         }
     }

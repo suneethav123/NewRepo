@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-// This test Purchases a ticket using Supersavers and Gift card
+// This  test Purchases a ticket using Supersavers and Gift card
 // Going again 
 
 namespace Cinemark.com.cinemark.testscripts.Purchases
@@ -36,9 +36,10 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
         [Obsolete]
         public void TicketPurchaseUsingSupersaverAndGiftCard()
         {
-            test = rep.CreateTest("TicketPurchaseUsingSupersaverAndGiftCard");
+            UITest(() =>
+            {
 
-            try
+                try
             {
                 HP = new HomePage(driver);
                 MR = new MovieRewardsInfoPage(driver);
@@ -84,15 +85,16 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
                 string ActualMsg = NM.GetTicketPurchaseSuccessMsg().Text;
 
                 Assert.AreEqual(ExpectedMsg, ActualMsg);
-                test.Log(Status.Pass, "Successfully purchased tickets using Supersavers & Gift Card - Passed");
+                 test.Log(Status.Pass, "Successfully purchased tickets using Supersavers & Gift Card - Passed");
 
             }
             catch (Exception e)
             {
-                test.Log(Status.Fail, "Successfully purchased tickets using Supersavers & Gift Card - Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Successfully purchased tickets using Supersavers & Gift Card - Failed");
+                
                 Assert.Fail();
-            }
+                }
+            });
 
 
 

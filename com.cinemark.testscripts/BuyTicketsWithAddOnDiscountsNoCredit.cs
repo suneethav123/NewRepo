@@ -4,7 +4,7 @@ using System;
 using System.Threading;
 using AventStack.ExtentReports;
 
-/*This test adds a new Movie Club Member and purchases 2 movie tickets ,one with credit and one an add on*/
+/*This // test adds a new Movie Club Member and purchases 2 movie tickets ,one with credit and one an add on*/
 
 namespace Cinemark.com.cinemark.testscripts
 {
@@ -25,14 +25,15 @@ namespace Cinemark.com.cinemark.testscripts
 
 
 
-        /*This test adds a new Movie Club Member and adds 2 movie tickets */
+        /*This // test adds a new Movie Club Member and adds 2 movie tickets */
 
         [Test ,Order(1)]
         [Obsolete]
         public void AddMCMAddTickets()
         {
-            test = rep.CreateTest("AddMCMAddTickets");
-            try
+            UITest(() =>
+            {
+                try
             {
                 HP = new HomePage(driver);
                 MR = new MovieRewardsInfoPage(driver);
@@ -70,14 +71,15 @@ namespace Cinemark.com.cinemark.testscripts
                 string ActMsg = NM.GetPointsEarned().Text;
 
                 Assert.AreEqual(ExpMsg, ActMsg);
-                test.Log(Status.Pass, "2 tickets 1 using movie credit & other Add On purchased - Passed ");
+               test.Log(Status.Pass, "2 tickets 1 using movie credit & other Add On purchased - Passed ");
             }
             catch (Exception e)
             {
-                test.Log(Status.Fail, "2 tickets 1 using movie credit & other Add On purchased - Failed ");
-                test.Log(Status.Fail, e.ToString());
+               test.Log(Status.Fail, "2 tickets 1 using movie credit & other Add On purchased - Failed ");
+               
                 Assert.Fail();
-            }
+                }
+            });
 
 
 
@@ -87,13 +89,14 @@ namespace Cinemark.com.cinemark.testscripts
 
        
 
-        /* This test is to Complete purchase  for 2 Add On tickets */
+        /* This // test is to Complete purchase  for 2 Add On tickets */
         [Test ,Order(2)]
         [Obsolete]
         public void CompletePurchaseAddOnTickets()
         {
-            test = rep.CreateTest("CompletePurchaseAddOnTickets");
-            try
+            UITest(() =>
+            {
+                try
             {
                 TS = new TimeSlots(driver);
 
@@ -115,14 +118,15 @@ namespace Cinemark.com.cinemark.testscripts
                 string ActualSuccessMsg = NM.GetTicketPurchaseSuccessMsg().Text;
 
                 Assert.AreEqual(ExpectedSuccessMsg, ActualSuccessMsg);
-                test.Log(Status.Pass, "2 Add On tickets purchased - Passed");
+             test.Log(Status.Pass, "2 Add On tickets purchased - Passed");
             }
             catch (Exception e)
             {
-                test.Log(Status.Fail, "2 Add On tickets purchased - Failed");
-                test.Log(Status.Fail, e.ToString());
+            test.Log(Status.Fail, "2 Add On tickets purchased - Failed");
+               
                 Assert.Fail();
-            }
+                }
+            });
 
         }
 

@@ -3,7 +3,7 @@ using NUnit.Framework;
 using System;
 using AventStack.ExtentReports;
 
-/*  This test is to add a new MCM and make a complete purchase for tickets using Movie Credits*/
+/*  This // test is to add a new MCM and make a complete purchase for tickets using Movie Credits*/
 
 namespace Cinemark.com.cinemark.testscripts
 {
@@ -26,8 +26,9 @@ namespace Cinemark.com.cinemark.testscripts
         [Obsolete]
         public void CompleteMoviePurchaseUsingCredits()
         {
-            test = rep.CreateTest("CompleteMoviePurchaseUsingCredits");
-            try
+            UITest(() =>
+            {
+                try
             {
 
                 HP = new HomePage(driver);
@@ -66,14 +67,15 @@ namespace Cinemark.com.cinemark.testscripts
                 string ActMsg = NM.GetPointsEarned().Text;
 
                 Assert.AreEqual(ExpMsg, ActMsg);
-                test.Log(Status.Pass, " Purchase tickets using Movie Credits - Passed");
+               test.Log(Status.Pass, " Purchase tickets using Movie Credits - Passed");
             }
             catch (Exception e)
             {
                 test.Log(Status.Fail, " Purchase tickets using Movie Credits - Failed");
-                test.Log(Status.Fail, e.ToString());
+               
                 Assert.Fail();
-            }
+                }
+            });
 
 
 

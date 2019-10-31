@@ -10,6 +10,7 @@ namespace Cinemark.com.cinemark.pages
     class MovieClub
     {
         WebDriverWait wait;
+      
 
         [FindsBy(How = How.Id, Using = "billingZipBtn")]
         private IWebElement BillingZipBtn;

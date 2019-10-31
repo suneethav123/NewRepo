@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using AventStack.ExtentReports;
 using Cinemark.DataBase;
 
-// This test purchases a ticket using SuperSaver Code
+// This // test purchases a ticket using SuperSaver Code
 
 namespace Cinemark.com.cinemark.testscripts.Purchases
 {[TestFixture]
@@ -36,8 +36,9 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
         [Obsolete]
         public void TicketPurchaseUsingSuperSavers()
         {
-            test = rep.CreateTest("TicketPurchaseUsingSuperSavers");
-            try
+            UITest(() =>
+            {
+                try
             {
 
                 HP = new HomePage(driver);
@@ -81,17 +82,18 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
                 string ActualSuccessMsg = NM.GetTicketPurchaseSuccessMsg().Text;
 
                 Assert.AreEqual(ExpectedSuccessMsg, ActualSuccessMsg);
-                test.Log(Status.Pass, "Successfully Ticket purchased using Supersaver - Passed");
+                 test.Log(Status.Pass, "Successfully Ticket purchased using Supersaver - Passed");
             }
             catch(Exception e)
             {
-                test.Log(Status.Fail, "Successfully Ticket purchased using Supersaver - Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Successfully Ticket purchased using Supersaver - Failed");
+             
                 Assert.Fail();
-            }
+                }
+            });
 
 
-           
+
 
         }
 

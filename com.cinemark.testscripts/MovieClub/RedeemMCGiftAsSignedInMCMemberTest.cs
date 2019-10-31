@@ -6,7 +6,7 @@ using AventStack.ExtentReports;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium;
 
-/*  This test is to redeem Movie Club Membership gift as a signed in Movie Club Member ,so the gift code adds a credit to the account when redeemed*/
+/*  This // test is to redeem Movie Club Membership gift as a signed in Movie Club Member ,so the gift code adds a credit to the account when redeemed*/
 
 namespace Cinemark.com.cinemark.testscripts
 {
@@ -28,14 +28,14 @@ namespace Cinemark.com.cinemark.testscripts
         private string code;
 
 
-        /*  Below test is to purchase a Movie Club Membership gift card */
+        /*  Below // test is to purchase a Movie Club Membership gift card */
 
         [Test, Order(1)]
         [Obsolete]
         public void MovieMembershipGiftPurchase()
         {
-            test = rep.CreateTest("MovieMembershipGiftPurchase");
-            try
+           
+            UITest(() =>{try
             {
                 HP = new HomePage(driver);
                 GP = new GiftsPage(driver);
@@ -63,15 +63,16 @@ namespace Cinemark.com.cinemark.testscripts
             }
             catch (Exception e)
             {
-                test.Log(Status.Fail, "Movie Club Membership gift purchased Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Movie Club Membership gift purchased Failed");
+                
                 Assert.Fail();
-            }
+                }
+            });
 
         }
 
 
-        /*  Below test is to add a new Movie Club member without using Movie Club Membership gift card */
+        /*  Below // test is to add a new Movie Club member without using Movie Club Membership gift card */
 
         [Test, Order(2)]
         [Obsolete]
@@ -105,14 +106,14 @@ namespace Cinemark.com.cinemark.testscripts
 
         }
 
-        /* Below test redeems the Movie Club membership gift card   */
+        /* Below // test redeems the Movie Club membership gift card   */
 
         [Test, Order(3)]
         [Obsolete]
         public void RedeemMCGift()
         {
-            test = rep.CreateTest("RedeemMCGift");
-            try
+           
+            UITest(() =>{try
             {
                 MP = new MovieRewardsPage(driver);
 
@@ -126,14 +127,15 @@ namespace Cinemark.com.cinemark.testscripts
                 string ActualCredits = MP.GetCreditsAvailableText().Text;
 
                 Assert.AreEqual(ExpectedCredits, ActualCredits);
-                test.Log(Status.Pass, "Redeem Movie Club Membership Gift for credits Passed");
+                 test.Log(Status.Pass, "Redeem Movie Club Membership Gift for credits Passed");
             }
             catch (Exception e)
             {
-                test.Log(Status.Fail, "Redeem Movie Club Membership Gift for credits Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Redeem Movie Club Membership Gift for credits Failed");
+                
                 Assert.Fail();
-            }
+                }
+            });
 
 
         }

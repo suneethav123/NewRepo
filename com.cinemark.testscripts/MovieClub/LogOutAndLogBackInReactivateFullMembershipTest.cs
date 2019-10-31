@@ -5,7 +5,7 @@ using AventStack.ExtentReports;
 using System.Threading;
 
 
-/*  This test User's MC membership is cancelled ,logs out & then logs back in and Reactivates the membership*/
+/*  This // test User's MC membership is cancelled ,logs out & then logs back in and Reactivates the membership*/
 
 namespace Cinemark.com.cinemark.testscripts
 {
@@ -24,8 +24,9 @@ namespace Cinemark.com.cinemark.testscripts
         [Obsolete]
         public void ReactivateFullMembershipLoggingBackIn()
         {
-            test = rep.CreateTest("ReactivateFullMembershipLoggingBackIn");
-            try
+            UITest(() =>
+            {
+                try
             {
                 HP = new HomePage(driver);
                 MR = new MovieRewardsInfoPage(driver);
@@ -59,14 +60,15 @@ namespace Cinemark.com.cinemark.testscripts
 
                 Boolean SuccessMessage = MRP.GetMemberStatusHeadLine().Text.Contains("We");
                 Assert.True(SuccessMessage);
-                test.Log(Status.Pass, "Reactivating Movie Club membership by logging out and logging back in - Passed");
+               test.Log(Status.Pass, "Reactivating Movie Club membership by logging out and logging back in - Passed");
             }
             catch (Exception e)
             {
-                test.Log(Status.Fail, "Reactivating Movie Club membership by logging out and logging back in - Failed");
-                test.Log(Status.Fail, e.ToString());
+               test.Log(Status.Fail, "Reactivating Movie Club membership by logging out and logging back in - Failed");
+               
                 Assert.Fail();
-            }
+                }
+            });
 
         }
     }

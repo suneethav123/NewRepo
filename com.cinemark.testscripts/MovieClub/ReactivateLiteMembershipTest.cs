@@ -6,7 +6,7 @@ using System;
 using System.Threading;
 using AventStack.ExtentReports;
 
-/*  This test reactivates Lite Movie Club membership */
+/*  This // test reactivates Lite Movie Club membership */
 
 namespace Cinemark.com.cinemark.testscripts
 {
@@ -25,9 +25,10 @@ namespace Cinemark.com.cinemark.testscripts
         [Obsolete]
         public void ReactivateLiteMCMember()
         {
-            test = rep.CreateTest("ReactivateLiteMCMember");
+            UITest(() =>
+            {
 
-            try
+                try
             {
 
                 HP = new HomePage(driver);
@@ -68,15 +69,16 @@ namespace Cinemark.com.cinemark.testscripts
 
                 Assert.True(SuccessMessage);
 
-                test.Log(Status.Pass, "Movie Club - Reactivate to Movie Club Lite Passed");
+                 test.Log(Status.Pass, "Movie Club - Reactivate to Movie Club Lite Passed");
 
             }
             catch (Exception e)
             {
-                test.Log(Status.Fail, "Movie Club - Reactivate to Movie Club Lite Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Movie Club - Reactivate to Movie Club Lite Failed");
+            
                 Assert.Fail();
-            }
+                }
+            });
         }
 
     }

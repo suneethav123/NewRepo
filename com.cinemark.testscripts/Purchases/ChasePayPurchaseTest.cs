@@ -31,9 +31,10 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
 
         public void ChasePayPurchase()
         {
-            test = rep.CreateTest("ChasePayPurchase");
+            UITest(() =>
+            {
 
-            try
+                try
             {
 
                 SI = new SignInMCM(driver);
@@ -92,16 +93,17 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
 
                 Assert.AreEqual(ExpectedMsg, ActualMsg);
 
-                test.Log(Status.Pass, "Chase Pay purchase successfull - Passed");
+                 test.Log(Status.Pass, "Chase Pay purchase successfull - Passed");
 
 
             }
             catch(Exception e)
             {
-                test.Log(Status.Fail, "Chase Pay purchase successfull - Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Chase Pay purchase successfull - Failed");
+               
                 Assert.Fail();
-            }
+                }
+            });
 
 
 

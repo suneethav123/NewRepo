@@ -30,8 +30,9 @@ namespace Cinemark.com.cinemark.testscripts.Other
         [Obsolete]
         public void StubAcct()
         {
-            test = rep.CreateTest("StubAcct");
-            try
+            UITest(() =>
+            {
+                try
             {
                 HP = new HomePage(driver);
                 FM = new FeaturedMovies(driver);
@@ -76,14 +77,15 @@ namespace Cinemark.com.cinemark.testscripts.Other
                 string ActualMsg = NM.GetSuccessMessage().Text;
 
                 Assert.AreEqual(ExpectedMsg, ActualMsg);
-                test.Log(Status.Pass, "Stub Acct is converted to Movie Club member thru Movie Rewards - Passed");
+                 test.Log(Status.Pass, "Stub Acct is converted to Movie Club member thru Movie Rewards - Passed");
             }
             catch (Exception e)
             {
                 test.Log(Status.Fail, "Stub Acct is converted to Movie Club member thru Movie Rewards - Failed");
-                test.Log(Status.Fail, e.ToString());
+               
                 Assert.Fail();
-            }
+                }
+            });
 
         }
     }

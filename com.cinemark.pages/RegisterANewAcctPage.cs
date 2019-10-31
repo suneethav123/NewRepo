@@ -9,12 +9,15 @@ namespace Cinemark.com.cinemark.pages
 
         [FindsBy(How = How.Id, Using = "Email")]
         private IWebElement txtEmail;
+       
+        [FindsBy(How = How.Id, Using = "ConfirmEmail")]
+        private IWebElement txtconfirmEmail;
 
         [FindsBy(How = How.Id, Using = "Password")]
         private IWebElement txtPassword;
 
-        [FindsBy(How = How.Id, Using = "ConfirmPassword")]
-        private IWebElement txtConfirmPassword;
+      //  [FindsBy(How = How.Id, Using = "ConfirmPassword")]
+      //  private IWebElement txtConfirmPassword;
 
         [FindsBy(How = How.Id, Using = "FirstName")]
         private IWebElement txtFirstName;
@@ -48,11 +51,12 @@ namespace Cinemark.com.cinemark.pages
             PageFactory.InitElements(driver, this);
         }
 
-        public void RegisterNewAcct(string email,string password,string confirmPass,string fname,string lname,string phone,string zip)
+        public void RegisterNewAcct(string email,string confirmEmail,string password, string fname,string lname,string phone,string zip)
         {
             txtEmail.SendKeys(email);
+            txtconfirmEmail.SendKeys(email);
             txtPassword.SendKeys(password);
-            txtConfirmPassword.SendKeys(confirmPass);
+            //txtConfirmPassword.SendKeys(confirmPass);
             txtFirstName.SendKeys(fname);
             txtLastName.SendKeys(lname);
             txtPhone.SendKeys(phone);
@@ -63,11 +67,12 @@ namespace Cinemark.com.cinemark.pages
 
         }
 
-        public void RegisterDuplicateNewAcct(string email, string password, string confirmPass, string fname, string lname, string phone, string zip)
+        public void RegisterDuplicateNewAcct(string email, string confirmEmail, string password, string fname, string lname, string phone, string zip)
         {
             txtEmail.SendKeys(email);
+            txtconfirmEmail.SendKeys(confirmEmail);
             txtPassword.SendKeys(password);
-            txtConfirmPassword.SendKeys(confirmPass);
+            //txtConfirmPassword.SendKeys(confirmPass);
             txtFirstName.SendKeys(fname);
             txtLastName.SendKeys(lname);
             txtPhone.SendKeys(phone);

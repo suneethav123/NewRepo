@@ -7,7 +7,7 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium;
 
 
-//  This test purchases tickets using a gift card & refunds the tickets amount back to the Giftcard
+//  This // test purchases tickets using a gift card & refunds the tickets amount back to the Giftcard
 
 namespace Cinemark.com.cinemark.testscripts.Purchases
 {[TestFixture]
@@ -40,8 +40,9 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
         [Obsolete]
         public void TicketPurchaseWithGiftCard()
         {
-            test = rep.CreateTest("TicketPurchaseWithGiftCard");
-            try
+            UITest(() =>
+            {
+                try
             {
                 HP = new HomePage(driver);
                 MR = new MovieRewardsInfoPage(driver);
@@ -109,15 +110,16 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
                 string ActualMsg = NM.GetTicketPurchaseSuccessMsg().Text;
 
                 Assert.AreEqual(ExpectedMsg, ActualMsg);
-                test.Log(Status.Pass, "Successfully purchased tickets using Gift Card - Passed");
+                 test.Log(Status.Pass, "Successfully purchased tickets using Gift Card - Passed");
 
             }
             catch (Exception e)
             {
-                test.Log(Status.Fail, "Successfully purchased tickets using Gift Card - Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Successfully purchased tickets using Gift Card - Failed");
+              
                 Assert.Fail();
-            }
+                }
+            });
 
 
         }
@@ -130,9 +132,9 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
         [Obsolete]
         public void RefundToGiftCard()
         {
-
-            test = rep.CreateTest("RefundToGiftCard");
-            try
+                UITest(() =>
+                {
+                    try
             {
                 GS = new GuestServicesPage(driver);
                 GSR = new GuestServicesRefundPage(driver);
@@ -146,14 +148,15 @@ namespace Cinemark.com.cinemark.testscripts.Purchases
                 string ActualMsg = GSR.GetRefundSuccessMsg().Text;
 
                 Assert.AreEqual(ExpectedMsg, ActualMsg);
-                test.Log(Status.Pass, "Successfully refunded the tickets amount back to Gift Card - Passed");
+                 test.Log(Status.Pass, "Successfully refunded the tickets amount back to Gift Card - Passed");
             }                      
             catch (Exception e)
             {
-                test.Log(Status.Fail, "Successfully refunded the tickets amount back to Gift Card- Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Successfully refunded the tickets amount back to Gift Card- Failed");
+             
                 Assert.Fail();
-            }
+                    }
+                });
 
         }
     }

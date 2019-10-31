@@ -19,8 +19,9 @@ namespace Cinemark.com.cinemark.testscripts
         [Obsolete]
         public void SignInWithTermsConditions()
         {
-            test = rep.CreateTest("SignInWithTermsConditions");
-            try
+            UITest(() =>
+            {
+                try
             {
                 HP = new HomePage(driver);
                 SI = new SignInMCM(driver);
@@ -36,14 +37,15 @@ namespace Cinemark.com.cinemark.testscripts
                 string ActualText = HP.GetYourAccountLink().Text;
 
                 Assert.AreEqual(ExpectedText, ActualText);
-                test.Log(Status.Pass, "Existing Member is able to sign in successfully Passed");
+                 test.Log(Status.Pass, "Existing Member is able to sign in successfully Passed");
             }
             catch (Exception e)
             {
-                test.Log(Status.Fail, "Existing Member is able to sign in successfully Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Existing Member is able to sign in successfully Failed");
+              
                 Assert.Fail();
             }
+        });
 
         }
 

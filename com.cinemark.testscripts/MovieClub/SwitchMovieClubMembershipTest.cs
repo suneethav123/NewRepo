@@ -26,8 +26,8 @@ namespace Cinemark.com.cinemark.testscripts
         [Obsolete]
         public void MovieClubLite()
         {
-            test = rep.CreateTest("MovieClubLite");
-            try
+           
+            UITest(() =>{try    
             {
                 HP = new HomePage(driver);
                 MR = new MovieRewardsInfoPage(driver);
@@ -58,15 +58,16 @@ namespace Cinemark.com.cinemark.testscripts
 
                 Assert.AreEqual(ExpectedMemberStatusMsg, ActualMemberStatusMsg);
 
-                test.Log(Status.Pass, "Movie Club - Switch to Movie Club Lite Passed");
+                 test.Log(Status.Pass, "Movie Club - Switch to Movie Club Lite Passed");
 
             }
             catch(Exception e)
             {
-                test.Log(Status.Fail, "Movie Club - Switch to Movie Club Lite Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Movie Club - Switch to Movie Club Lite Failed");
+             
                 Assert.Fail();
-            }
+                }
+            });
 
         }
 
@@ -78,8 +79,8 @@ namespace Cinemark.com.cinemark.testscripts
         [Obsolete]
         public void MovieClubLiteMembershipPlanValue()
         {
-            test = rep.CreateTest("MovieClubLiteMembershipPlanValue");
-            try
+           
+            UITest(() =>{try    
             {
                 HP.GoToMovieRewards();
                 MRP.ManageYourMembership();
@@ -91,15 +92,16 @@ namespace Cinemark.com.cinemark.testscripts
 
                 Assert.AreEqual(ExpectedPlanValue, ActualPlanValue);
 
-                test.Log(Status.Pass, "Movie Club Lite Membership Plan Value is correct Passed");
+                 test.Log(Status.Pass, "Movie Club Lite Membership Plan Value is correct Passed");
             }
             catch (Exception e)
             {
-                test.Log(Status.Fail, "Movie Club Lite Membership Plan Value is correct Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Fail, "Movie Club Lite Membership Plan Value is correct Failed");
+               
                 Assert.Fail();
+                }
+            });
             }
-        }
 
 
 
@@ -109,8 +111,8 @@ namespace Cinemark.com.cinemark.testscripts
          [Obsolete]
          public void MovieClubFull()
          {
-            test = rep.CreateTest("MovieClubFull");
-            try
+        
+            UITest(() =>{try    
             {
                 HP.GoToMovieRewards();
                 MRP.ChangeToFullMembership();
@@ -119,18 +121,19 @@ namespace Cinemark.com.cinemark.testscripts
                 Boolean SuccessMessage = MRP.GetMemberStatusHeadLine().Text.Contains("Welcome back to Movie Club!");
                 Assert.True(SuccessMessage);
 
-                test.Log(Status.Pass, "Switching Lite Movie Club User to Full Movie Club user Passed");
+                 test.Log(Status.Pass, "Switching Lite Movie Club User to Full Movie Club user Passed");
             }
             catch(Exception e)
             {
-                test.Log(Status.Pass, "Switching Lite Movie Club User to Full Movie Club user Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Pass, "Switching Lite Movie Club User to Full Movie Club user Failed");
+          
                 Assert.Fail();
-            }
+                }
+            });
 
 
 
-         }
+        }
 
 
         /*  Checking Movie Club Full Plan Value*/
@@ -139,9 +142,9 @@ namespace Cinemark.com.cinemark.testscripts
         [Obsolete]
         public void MovieClubFullMembershipPlanValue()
         {
-            test = rep.CreateTest("MovieClubFullMembershipPlanValue");
+          
 
-            try
+            UITest(() =>{try    
             {
                 HP.GoToMovieRewards();
                 MRP.ManageYourMembership();
@@ -152,15 +155,16 @@ namespace Cinemark.com.cinemark.testscripts
 
                 Assert.AreEqual(ExpectedPlanValue, ActualPlanValue);
 
-                test.Log(Status.Pass, "Movie Club Full Plan Value displayed is correct Passed");
+                 test.Log(Status.Pass, "Movie Club Full Plan Value displayed is correct Passed");
 
             }
             catch (Exception e)
             {
-                test.Log(Status.Pass, "Movie Club Full Plan Value displayed is correct Failed");
-                test.Log(Status.Fail, e.ToString());
+                 test.Log(Status.Pass, "Movie Club Full Plan Value displayed is correct Failed");
+              
                 Assert.Fail();
-            }
+                }
+            });
         }
 
     }
