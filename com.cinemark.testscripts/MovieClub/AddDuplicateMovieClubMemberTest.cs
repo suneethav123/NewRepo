@@ -21,6 +21,7 @@ namespace Cinemark.com.cinemark.testscripts
         /* This // test is checking that existing user is not added again  */
 
         [Test]
+        [Retry(2)]
         [Obsolete]
         public void DuplicateNewClubMemberAdd()
         {
@@ -29,6 +30,8 @@ namespace Cinemark.com.cinemark.testscripts
             {
                 try
             {
+                    //Add or edit Test steps for this test case
+                    test.Info("Test Case Details --> 1. step1  --> 2. step2 --> 3. step3 --> 4. step4 --> 5. step5");
                 HP = new HomePage(driver);
                 MR = new MovieRewardsInfoPage(driver);
                 MC = new MovieClub(driver);

@@ -26,60 +26,60 @@ namespace Cinemark.Utilities
             //log.Info("path is:=>" + sDir);
             return sDir;
         }
-         
-      
 
-         public string GetTestDataLocation()
-         { 
-             return GetProjectLocation() + @"\TestData\"; 
-         } 
- 
- 
-         public string GetTestResultsLocation()
-         { 
-             return GetUserDesktopPath() + @"\TestResults\"; 
-         } 
-         public static string GetConfigTextFilePath()
-         { 
-             return GetBasePath() + @"\Config.txt"; 
-         } 
-         public static string GetBasePath()
-         { 
-             string BaseDirToProjects = Directory.GetParent(System.AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName; 
-            
-             log.Info("=================>>> base path is:=>" + BaseDirToProjects); 
-             return BaseDirToProjects; 
-         } 
-         public string GetTestOutputLocation()
-         { 
-             return GetUserDesktopPath() + @"\TestOutput\"; 
-         } 
- 
-         public string GetUserDesktopPath()
-         { 
-             return System.Environment.GetEnvironmentVariable("USERPROFILE") + "\\Desktop"; 
-         } 
- 
- 
-         public string GetUserProfilePath()
-         { 
-             return System.Environment.GetEnvironmentVariable("USERPROFILE"); 
-         } 
- 
- 
-         public string GetCurrentDirectoryPath()
-         { 
-             return Environment.CurrentDirectory; 
-         } 
- 
- 
-         public string GetSolutionLocation()
-         { 
-             string sDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName; 
-             return sDirectory; 
-         }
 
-    
+
+        public string GetTestDataLocation()
+        {
+            return GetProjectLocation() + @"\TestData\";
+        }
+
+
+        public string GetTestResultsLocation()
+        {
+            return GetUserDesktopPath() + @"\TestResults\";
+        }
+        public static string GetConfigTextFilePath()
+        {
+            return GetBasePath() + @"\Config.txt";
+        }
+        public static string GetBasePath()
+        {
+            string BaseDirToProjects = Directory.GetParent(System.AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName;
+
+            log.Info("=================>>> base path is:=>" + BaseDirToProjects);
+            return BaseDirToProjects;
+        }
+        public string GetTestOutputLocation()
+        {
+            return GetUserDesktopPath() + @"\TestOutput\";
+        }
+
+        public string GetUserDesktopPath()
+        {
+            return System.Environment.GetEnvironmentVariable("USERPROFILE") + "\\Desktop";
+        }
+
+
+        public string GetUserProfilePath()
+        {
+            return System.Environment.GetEnvironmentVariable("USERPROFILE");
+        }
+
+
+        public string GetCurrentDirectoryPath()
+        {
+            return Environment.CurrentDirectory;
+        }
+
+
+        public string GetSolutionLocation()
+        {
+            string sDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            return sDirectory;
+        }
+
+
         public string GetKeyValue(string sectionname, string keyname)
         {
             var section = (ConfigurationManager.GetSection(sectionname) as System.Collections.Specialized.NameValueCollection);
@@ -119,12 +119,21 @@ namespace Cinemark.Utilities
 
 
         public void killProcesses(string processName)
-         { 
-             foreach (var process in Process.GetProcessesByName(processName)) 
-             { 
-                 process.Kill(); 
-             } 
-         }
- 
+        {
+            foreach (var process in Process.GetProcessesByName(processName))
+            {
+                process.Kill();
+            }
+        }
+
+          
     }
+
+
+
+    
 }
+
+ 
+ 
+

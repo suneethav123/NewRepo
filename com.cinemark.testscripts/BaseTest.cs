@@ -5,17 +5,15 @@ using Cinemark.Reporting;
 using Cinemark.Utilities;
 using log4net;
 using Microsoft.Azure.WebJobs.Description;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
+using NUnit.Framework.Internal;
+using NUnit.Framework.Internal.Commands;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.Extensions;
-using OpenQA.Selenium.Chrome;
 using System;
+using System.Configuration;
 using System.Drawing.Imaging;
-
-
-
-
 
 
 // This is Base// test class
@@ -32,23 +30,28 @@ namespace Cinemark.com.cinemark.testscripts
         public static ExtentTest test;
         baseclass baseclass = new baseclass();
         Reporter reporter = new Reporter();
+        MessageService service = new MessageService();
+       
         public static ILog log = log4net.LogManager.GetLogger("BaseTest");
 
+        // UITest wraps all Tests to catch not just assertion failures but all exceptions and perform mentioned actions
         public void UITest(Action action)
         {
             try
             {
                 action();
+                
             }
             catch (Exception e)
             {
-                string SS = reporter.getScreenshot(driver);
+                         
+                reporter.getScreenshot(driver);
                 test.Log(Status.Fail, e.ToString());
                 throw;
-
             }
+            
         }
-
+      
 
         [OneTimeSetUp]
 
@@ -69,7 +72,7 @@ namespace Cinemark.com.cinemark.testscripts
         {
             try {
               
-                test = rep.CreateTest(TestContext.CurrentContext.Test.Name);
+                test = rep.CreateTest(TestContext.CurrentContext.Test.MethodName);
                
             }
             catch (Exception e)
@@ -94,7 +97,7 @@ namespace Cinemark.com.cinemark.testscripts
                 {
                     case TestStatus.Failed:
                         logstatus = Status.Fail;
-                        string SS = reporter.getScreenshot(driver);
+                        reporter.getScreenshot(driver);    //--enable this peice of code if you are debugging/running only 1 particulatr test.
                         test.Log(logstatus, "Test ended with status *** " +logstatus + " ***  " +errorMessage);
                         test.Log(logstatus, "Snapshot below: " + test.AddScreenCaptureFromPath(screenshotpath));
                         break;
@@ -102,7 +105,7 @@ namespace Cinemark.com.cinemark.testscripts
                         logstatus = Status.Skip;
                         test.Log(logstatus, "Test ended with status *** " +logstatus + " ***  ");
                         break;
-                    default:
+                    case TestStatus.Passed:
                         logstatus = Status.Pass;
                         test.Log(logstatus, "Test ended with status *** " +logstatus + " ***  ");
                         break;
@@ -120,13 +123,16 @@ namespace Cinemark.com.cinemark.testscripts
             try
             {
                 rep.Flush();
+                service.CreateEmailItem();
             }
             catch (Exception e)
             {
                 throw (e);
             }
             driver.Close();
-        }
+            
+            }
+       
 
 
     }

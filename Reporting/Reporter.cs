@@ -7,6 +7,15 @@ using System.Drawing.Imaging;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using AventStack.ExtentReports;
+using MimeKit;
+using System.IO.Compression;
+using NETCore.MailKit;
+using NETCore.MailKit.Core;
+using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using MailKit.Net.Imap;
+using MailKit.Net.Smtp;
 
 namespace Cinemark.Reporting
 {
@@ -19,9 +28,9 @@ namespace Cinemark.Reporting
         public IWebDriver driver;
         public static int pass_counter = 0;
         public static int totalcounter = 0, failed_Counter = 0;
-      
 
-               ///  /// <summary>
+
+        ///  /// <summary>
         /// Creates the custom report folder and returns the path
         /// </summary>
         /// 
@@ -29,10 +38,16 @@ namespace Cinemark.Reporting
         private static ILog log = LogManager.GetLogger("Reporter");
         public string CreateReportsDirectory()
         {
+            string fileName = "cinemarkLogo.PNG";
+
             string date = DateTime.Now.ToString("MM-dd-yy");
-            string path = Directory.GetParent(new autoutilities().GetProjectLocation()).ToString();
-            path = Path.Combine(path, "Automation_Report");
-            path = Path.Combine(path, "CustomReport");
+            string projectpath = Directory.GetParent(new autoutilities().GetProjectLocation()).ToString();
+            string reportpath = Path.Combine(projectpath, "Automation_Report");
+            string path = Path.Combine(reportpath, "CustomReport");
+            if (Directory.Exists(reportpath))
+            {
+                Directory.Delete(reportpath, true);
+            }
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
@@ -41,33 +56,46 @@ namespace Cinemark.Reporting
             {
                 if (!dir.Contains(date))
                 {
-                    Directory.Delete(dir, true);
+                   Directory.Delete(dir, true);
                 }
             }
             path = Path.Combine(path, "Reports_On_" + date);
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
+                string sourceFile = System.IO.Path.Combine(projectpath, fileName);
+                string destFile = System.IO.Path.Combine(path, fileName);
+                System.IO.File.Copy(sourceFile, destFile, true);
             }
             FullPath = path;
             Console.WriteLine("Find Custom reports here :=>>>>>>>" + FullPath);
-         
+
             return FullPath;
         }
 
-       
+        public static string ZipReportFolder()
+        {
+            string projectpath = Directory.GetParent(new autoutilities().GetProjectLocation()).ToString();
+            string startPath = Path.Combine(projectpath, "Automation_Report"); ;//folder to add
+            string zipPath = projectpath + "//Automation_Report.zip";//URL for your ZIP file            
+            ZipFile.CreateFromDirectory(startPath, zipPath, CompressionLevel.Fastest, true);
+            return zipPath;
+
+        }
+
+
         public string HtmlPath()
         {
-           string htmlpath = CreateReportsDirectory();
+            string htmlpath = CreateReportsDirectory();
             htmlpath = Path.Combine(htmlpath, "Cinemark_Automation_Report.html");
             return htmlpath;
             log.Info(htmlpath);
         }
         /// Creates the Html file with header
         /// </summary>
-        public void CreateHtmlHeader(String TestName)
+        public void CreateHtmlHeader()
         {
-          
+
             string path = HtmlPath();
             FileInfo f = new FileInfo(path);
             if (f.Exists)
@@ -77,7 +105,7 @@ namespace Cinemark.Reporting
             writer = new StreamWriter(path, true);
             writer.Write("<html>");
             writer.Write("<head>");
-            writer.Write("<title>Report_for_" + TestName + "</title>");
+            writer.Write("<title>Cinemark" + "Automation Report" + "</title>");
             writer.Write("<style>.datagrid table { border-collapse: collapse; text-align: left;} .datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: hidden; border: 1px solid #006699; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }.datagrid table td, .datagrid table th { padding: 3px 10px; }.datagrid table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #00557F) );background:-moz-linear-gradient( center top, #006699 5%, #00557F 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557F');background-color:#006699; color:#ffffff; font-size: 15px; font-weight: bold; border-left: 1px solid #0070A8; } .datagrid table thead th:first-child { border: none; }.datagrid table tr td { color: #00496B; border-left: 1px solid #E1EEF4;font-size: 12px;font-weight: normal; }.datagrid table tbody .alt td { background: #E1EEF4; color: #00496B; }.datagrid table tbody td:first-child { border-left: none; }.datagrid table tr:last-child td { border-bottom: none; }.datagrid table tfoot td div { border-top: 1px solid #006699;background: #E1EEF4;} .datagrid table tfoot td { padding: 0; font-size: 12px } .datagrid table tfoot td div{ padding: 2px; }.datagrid table tfoot td ul { margin: 0; padding:0; list-style: none; text-align: right; }.datagrid table tfoot  li { display: inline; }.datagrid table tfoot li a { text-decoration: none; display: inline-block;  padding: 2px 8px; margin: 1px;color: #FFFFFF;border: 1px solid #006699;-webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #00557F) );background:-moz-linear-gradient( center top, #006699 5%, #00557F 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557F');background-color:#006699; }.datagrid table tfoot ul.active, .datagrid table tfoot ul a:hover { text-decoration: none;border-color: #006699; color: #FFFFFF; background: none; background-color:#00557F;}div.dhtmlx_window_active, div.dhx_modal_cover_dv { position: fixed !important; }</style>");
             writer.Write("<style type=" + "text/css" + ">body { font-family: Verdana, Arial, sans-serif; font-size: 12px; }#placeholder { width: 1400px; height: 300px; }.legend table, .legend > div { height: 82px !important; opacity: 1 !important; left: 170px; top: 10px; width: 116px !important; }.legend table { border: 1px solid #555; padding: 5px; }</style>");
             // writer.Write("<script type=" + "text/javascript" + " language=" + "javascript" + " src=" + flot1 + "></script><script type=" + "text/javascript" + " language=" + "javascript" + " src=" + flot2 + "></script><script type=" + "text/javascript" + " language=" + "javascript" + " src=" + flot3 + "></script>");
@@ -103,7 +131,7 @@ namespace Cinemark.Reporting
             writer.Write("<div class=\"datagrid\">");
             writer.Write("<table cellpadding=1 cellspacing=1 width='100%' align='center'><tr>");
             writer.Write("<thead><tr bgcolor='#3A5F89' style='border: 1px solid black;'>");
-           // writer.Write("<th align=center  style='width:15%'><b><font color='white'>Test Suite</font></b></th>");
+            // writer.Write("<th align=center  style='width:15%'><b><font color='white'>Test Suite</font></b></th>");
             writer.Write("<th align=center  style='width:20%''><b><font color='white'>Test Case</font></b></th>");
             writer.Write("<th align=center  style='width:10%'><b><font color='white'>Test Status</font></b></th>");
             writer.Write("<th align=center   style='width:2%'><b><font color='white'>Screenshot</font></b></th>");
@@ -113,25 +141,25 @@ namespace Cinemark.Reporting
         }
         public void ReportTestStatus(ExtentTest test, string TestName, string errorMessage, IWebDriver driver)
         {
-  
-            
+
+
             try
             {
                 var TestStatus = TestContext.CurrentContext.Result.Outcome.Status;
                 string screenshotpath = CreateScreenShotsFolder();
-              //  var errorMessage = TestContext.CurrentContext.Result.Message;
-             Status logstatus;
+                //  var errorMessage = TestContext.CurrentContext.Result.Message;
+                Status logstatus;
 
                 System.Console.WriteLine("TestResult : " + TestStatus);
 
                 switch (TestStatus)
                 {
-                    case TestStatus.Failed :
+                    case TestStatus.Failed:
                         logstatus = Status.Fail;
-                       
+
                         test.Log(logstatus, "Test ended with " + logstatus + "---" + errorMessage);
-                        test.Log(logstatus, "Screenshot below: " +test.AddScreenCaptureFromPath(screenshotpath));                       
-                        test.AddScreenCaptureFromPath(screenshotpath,"screenshot for "+TestName+".png");
+                        test.Log(logstatus, "Screenshot below: " + test.AddScreenCaptureFromPath(screenshotpath));
+                        test.AddScreenCaptureFromPath(screenshotpath, "screenshot for " + TestName + ".png");
                         writer.Write("<td align=center><b><font color='#CC0000'> Failed </font></b></td>");
                         writer.Write("<td align=center><b><font color='#3A5F89'><a href= " + screenshotpath + "'>Screenshot</a></font></b></td>");
                         writer.Write("<td  align=left><b><font color=blue><details><summary>" + "StackTrace" + "</summary><p>" + errorMessage + "</p></details></td>");
@@ -169,7 +197,7 @@ namespace Cinemark.Reporting
         /// <param name="Error"></param>
         public void ReporterHtmlData(string TestCase, string TestStatus, string Error, string screenshotpath)
         {
-        
+
             Reporter.log.Info("writing data.................");
             if (counter % 2 == 0)
             {
@@ -201,7 +229,7 @@ namespace Cinemark.Reporting
             writer.Flush();
             counter += 1;
         }
-        
+
         public void report_tests_count(float total_tests, float failed_tests, string log_path)
         {
 
@@ -318,14 +346,14 @@ namespace Cinemark.Reporting
             {
                 if (!dir.Contains(date))
                 {
-                    Directory.Delete(dir, true);
+                    // Directory.Delete(dir, true);
                 }
             }
             path = Path.Combine(path, "screenshots_On_" + date);
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
-                
+
             }
             return path;
         }
@@ -335,7 +363,7 @@ namespace Cinemark.Reporting
         /// </summary>
         /// Purpose: Capture the screenshot and merge with Gallio Report
         /// <return>Bitmap</returns>
-       ///DoNot modify this code///
+        ///DoNot modify this code///
 
         public string getScreenshot(IWebDriver _driver)
         {
@@ -343,26 +371,26 @@ namespace Cinemark.Reporting
             {
                 string TestName = TestContext.CurrentContext.Test.MethodName;
                 String filename = TestName + "_" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + ".png";
-                
+
                 if (File.Exists(filename))
-               {
+                {
                     File.Delete(filename);
                 }
 
                 string ScreenshotFolder = CreateScreenShotsFolder();
-                 if (!Directory.Exists(ScreenshotFolder))
+                if (!Directory.Exists(ScreenshotFolder))
                 {
                     Directory.CreateDirectory(ScreenshotFolder);
                 }
-              
+
                 string fileName = Path.Combine(ScreenshotFolder, filename);
                 ITakesScreenshot screenshotDriver = _driver as ITakesScreenshot;
                 Screenshot screenshot = screenshotDriver.GetScreenshot();
                 screenshot.SaveAsFile(fileName, ScreenshotImageFormat.Png);
                 Console.WriteLine("Screenshot: {0}", new Uri(fileName));
-                return "";               
+                return "";
                 log.Info("Find the screenshot here: " + fileName);
-              
+
             }
             catch (ArgumentNullException e)
             {
@@ -382,8 +410,8 @@ namespace Cinemark.Reporting
         /// </summary>
         public static string CreatePropertiesFile()
         {
-            
-            string path = new autoutilities().GetProjectLocation();           
+
+            string path = new autoutilities().GetProjectLocation();
             path = Path.Combine(path, "Reporter.properties");
             FileInfo f = new FileInfo(path);
             if (!f.Exists)
@@ -392,9 +420,47 @@ namespace Cinemark.Reporting
             }
             return path;
         }
+        
+        public async void SendEmail()
+        {
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("QA", "sanne@cinemark.com"));
+            message.To.Add(new MailboxAddress("SANNE", "sanne@cinemark.com"));
+            message.Subject = "QA Automation Report";
+
+            var builder = new BodyBuilder();
+
+        //  plain-text version of the message text
+        builder.TextBody = @"Hi,
+             Please find the attached Test report for your review.
+
+             -- Cinemark QA
+              ";
+            string zipfilepath = ZipReportFolder();
+        // attach Extent report zip folder
+        builder.Attachments.Add(zipfilepath);
+
+            // Now we just need to set the message body and we're done
+            message.Body = builder.ToMessageBody();
+
+            var client = new SmtpClient();
+            
+                client.ServerCertificateValidationCallback = (sender, certificate, chain, errors) => true;
+                client.AuthenticationMechanisms.Remove("XOAUTH2");
+
+                // Start of provider specific settings
+                await client.ConnectAsync("smtp.host", 587, false).ConfigureAwait(false);
+                await client.AuthenticateAsync("sanne@cinemark.com", "Iloveaaradhya123!").ConfigureAwait(false);
+                // End of provider specific settings
+
+                await client.SendAsync(message).ConfigureAwait(false);
+                await client.DisconnectAsync(true).ConfigureAwait(false);
+          
+        }
+}
+
     }
 
-}
 
 
 

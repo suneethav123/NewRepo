@@ -87,7 +87,8 @@ namespace Cinemark.Base
         public static IWebDriver SelectBrowser(IWebDriver driver)
         {
             string sType = _autoutilities.GetKeyValue("BROWSER", "Browser");
-            chromebrowser = new ChromeBrowser();
+            
+        chromebrowser = new ChromeBrowser();
             switch (sType)
             {
                 case "ie":

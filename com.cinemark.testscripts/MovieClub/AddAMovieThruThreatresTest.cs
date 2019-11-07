@@ -1,4 +1,5 @@
-﻿using Cinemark.com.cinemark.pages;
+﻿using AventStack.ExtentReports;
+using Cinemark.com.cinemark.pages;
 using NUnit.Framework;
 using System;
 
@@ -18,12 +19,18 @@ namespace Cinemark.com.cinemark.testscripts
         
         
         [Test]
+        [Retry(2)]
         [Obsolete]
         public void TicketTest()
         {
             UITest(() =>
             {
-                HP = new HomePage(driver);
+            try
+            {
+                //Add or edit Test steps for this test case
+                test.Info("Test Case Details --> 1. step1  --> 2. step2 --> 3. step3 --> 4. step4 --> 5. step5");
+
+            HP = new HomePage(driver);
             CT = new ChooseTheatre(driver);
             TF = new TheatreFeaturedMovies(driver);
             TS = new TimeSlots(driver);
@@ -36,8 +43,17 @@ namespace Cinemark.com.cinemark.testscripts
             TS.VirtualRealityMovieTimeSelection();
             ST.AddOneTicket();
             ST.AddTicketsToCart();
-            });
-        }
+
+                    test.Log(Status.Pass, "Successfully earned 9 points for a new Club member - Passed");
+                }
+                catch (Exception e)
+                {
+                    
+                   
+
+                }
+});
+}
 
         
 

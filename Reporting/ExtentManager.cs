@@ -13,17 +13,8 @@ namespace Cinemark.Reporting
     class ExtentManager
     {
         public static int pass_counter = 0;
-        //public static string TestName = TestContext.CurrentContext.Test.MethodName;
-      //  public static string TestCaseName = TestContext.CurrentContext.Test.MethodName;
         public static int totalcounter = 0, failed_Counter = 0;
-
-        
-
-        //Global Variable for Extend report
-        private static ExtentReports extent;
-      //  private static ExtentTest test;
-       // private static ExtentHtmlReporter htmlReporter;
-       // Reporter reporter = new Reporter();
+        private static ExtentReports extent;    
         public static ILog log = log4net.LogManager.GetLogger("ExtentManager");
 
         public static ExtentReports GetInstance()
@@ -36,21 +27,21 @@ namespace Cinemark.Reporting
                 //Initialize Extent report before test starts
 
                 string reportPath = (new Reporter().CreateReportsDirectory() + "\\CinemarkQADashboard_" + System.DateTime.Today.ToString("dd - MM - yyyy") + ".html");
-               // string reportPath = Path.Combine(folderpath, "\\Cinemark_Automation_Dashboard" + ".html");
-              
+                           
                 var htmlReporter = new ExtentHtmlReporter(reportPath);
                 log.Info(reportPath);
-
+                string imagePath = new autoutilities().GetProjectLocation() + "\\Resources\\cinemarkLogo.PNG";
                 //Attach report to reporter
                 extent = new ExtentReports();
                 extent.AttachReporter(htmlReporter);
-                extent.AddSystemInfo("OS", "Windows");
-                extent.AddSystemInfo("Environment", "Site B QA");
-               // extent.AddSystemInfo("User Name", "Suneetha Anne");
-
-                string configPath = new autoutilities().GetProjectLocation() + "\\extent-config.xml";
-               
-               htmlReporter.LoadConfig(configPath);
+                extent.AddSystemInfo("Report Title", "Cinemark Automation Test Report");
+                extent.AddSystemInfo("Repository Name", "Internet-Tests");
+                extent.AddSystemInfo("OS", System.Environment.OSVersion.VersionString);
+                extent.AddSystemInfo("Test Environment", new autoutilities().GetKeyValue("URL", "CinemarkURL"));              
+                extent.AddSystemInfo("User Name", System.Environment.UserName);
+                
+                string configPath = new autoutilities().GetProjectLocation() + "\\extent-config.xml";             
+                htmlReporter.LoadConfig(configPath);               
                 log.Info(configPath);
                 
             }
@@ -60,14 +51,7 @@ namespace Cinemark.Reporting
         }
 
 
-        /*public  void TerminateExtent()
-        {
-            string log_path = new Reporter().CreateReportsDirectory() + "\\logFile.log";
-            System.Console.WriteLine("Refer Log File:=>" + log_path);
-            reporter.report_tests_count(totalcounter, failed_Counter, log_path);            
-            reporter.CloseFileStream();
-
-        }*/
+      
 
         public void TearDown()
         {

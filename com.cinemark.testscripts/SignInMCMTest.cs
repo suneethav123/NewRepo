@@ -17,6 +17,7 @@ namespace Cinemark.com.cinemark.testscripts
 
 
         [Test]
+        [Retry(2)]
         [Obsolete]
         public void SignInMovieClubMemberTest()
         {

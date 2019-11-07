@@ -28,6 +28,7 @@ namespace Cinemark.com.cinemark.testscripts
         /* Adding a new Movie Club Member thru Movie Rewards link */
 
         [Test, Order(1)]
+        [Retry(2)]
         [Obsolete]
         public void AddNMCMemberThruMovieRewards()
 
@@ -38,6 +39,9 @@ namespace Cinemark.com.cinemark.testscripts
 
                 try
                 {
+                    //Add or edit Test steps for this test case
+                    test.Info("Test Case Details --> 1. step1  --> 2. step2 --> 3. step3 --> 4. step4 --> 5. step5");
+
 
                     HP = new HomePage(driver);
                     MR = new MovieRewardsInfoPage(driver);
@@ -83,6 +87,7 @@ namespace Cinemark.com.cinemark.testscripts
         /* This // test is checking if 9 points are earned when a new movie club member is added  */
 
         [Test,Order(2)]
+        [Retry(2)]
         public void MoviePointsTest()
         {
                        
@@ -91,6 +96,8 @@ namespace Cinemark.com.cinemark.testscripts
 
                 try
                 {
+                    //Add or edit Test steps for this test case
+                    test.Info("Test Case Details --> 1. step1  --> 2. step2 --> 3. step3 --> 4. step4 --> 5. step5");
 
                     string points = TestData.FullMembership;
                     int numberOfPoints = Utils.PointsEarned(points);
