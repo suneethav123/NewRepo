@@ -57,8 +57,9 @@ namespace Cinemark.Reporting
         {
             Microsoft.Office.Interop.Outlook.MailItem eMail = (Microsoft.Office.Interop.Outlook.MailItem)
           oApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
-            eMail.Subject = "Automation QA Report";            
-            eMail.To = "sanne@cinemark.com";
+            eMail.Subject = "Automation QA Report";
+            string ToAddress = new autoutilities().GetKeyValue("eMailTo", "eMail.To");
+            eMail.To = ToAddress;
             eMail.Body = @"Hi,
       Please find the attached Test report for your review.
 
@@ -67,7 +68,7 @@ namespace Cinemark.Reporting
              string zipfilepath = ZipReportFolder();
             eMail.Attachments.Add(zipfilepath, OlAttachmentType.olByValue, Type.Missing, Type.Missing);
             eMail.Importance = Microsoft.Office.Interop.Outlook.OlImportance.olImportanceLow;
-            ((Microsoft.Office.Interop.Outlook._MailItem)eMail).Send();
+            ((_MailItem)eMail).Send();
         }
     }
 }
