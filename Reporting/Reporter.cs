@@ -421,42 +421,7 @@ namespace Cinemark.Reporting
             return path;
         }
         
-        public async void SendEmail()
-        {
-            var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("QA", "sanne@cinemark.com"));
-            message.To.Add(new MailboxAddress("SANNE", "sanne@cinemark.com"));
-            message.Subject = "QA Automation Report";
-
-            var builder = new BodyBuilder();
-
-        //  plain-text version of the message text
-        builder.TextBody = @"Hi,
-             Please find the attached Test report for your review.
-
-             -- Cinemark QA
-              ";
-            string zipfilepath = ZipReportFolder();
-        // attach Extent report zip folder
-        builder.Attachments.Add(zipfilepath);
-
-            // Now we just need to set the message body and we're done
-            message.Body = builder.ToMessageBody();
-
-            var client = new SmtpClient();
-            
-                client.ServerCertificateValidationCallback = (sender, certificate, chain, errors) => true;
-                client.AuthenticationMechanisms.Remove("XOAUTH2");
-
-                // Start of provider specific settings
-                await client.ConnectAsync("smtp.host", 587, false).ConfigureAwait(false);
-                await client.AuthenticateAsync("sanne@cinemark.com", "Iloveaaradhya123!").ConfigureAwait(false);
-                // End of provider specific settings
-
-                await client.SendAsync(message).ConfigureAwait(false);
-                await client.DisconnectAsync(true).ConfigureAwait(false);
-          
-        }
+     
 }
 
     }
