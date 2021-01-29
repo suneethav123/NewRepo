@@ -192,7 +192,7 @@
       <Version>8.1.5717</Version>
     </PackageReference>
     <PackageReference Include="log4net">
-      <Version>2.0.8</Version>
+      <Version>2.0.10</Version>
     </PackageReference>
     <PackageReference Include="MailKit">
       <Version>2.4.0.1</Version>
